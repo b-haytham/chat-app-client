@@ -8,6 +8,10 @@ target 'chat_app_client' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   target 'chat_app_clientTests' do
     inherit! :complete
     # Pods for testing

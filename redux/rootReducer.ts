@@ -1,5 +1,5 @@
 const initialState = {
-  greeting: 'hello',
+  isAuth: false,
 
 };
 const rootReducer = (state = initialState, action: any) => {
@@ -9,3 +9,5 @@ const rootReducer = (state = initialState, action: any) => {
   }
 };
 export default rootReducer;
+
+
