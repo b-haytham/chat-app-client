@@ -1,12 +1,75 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Input, Text, Icon, Button} from 'react-native-elements';
+import { LaunchSceenRouteProps, LaunchScreenNavigationProps } from './types';
 
-const Register = () =>  {
-    return (
-        <View>
-            <Text>Register</Text>
-        </View>
-    )
+
+
+
+
+type Props = {
+  navigation: LaunchScreenNavigationProps
+  route: LaunchSceenRouteProps
 }
 
-export default Register
+
+
+const Register: React.FC<Props> = ({navigation}) => {
+  const handlePress = () => {
+      navigation.navigate('Login')
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text h1 style={styles.title}>
+        Register
+      </Text>
+      <View style={styles.form}>
+        <Input
+          placeholder="username "
+          leftIcon={{type: 'font-awesome', name: 'user'}}
+        />
+        <Input
+          placeholder="email"
+          leftIcon={{type: 'font-awesome', name: 'at'}}
+        />
+        <Input 
+            placeholder="password"
+            leftIcon={{type: 'font-awesome', name: 'lock'}}
+            secureTextEntry
+        />
+        <Button
+          title="Register"
+          type="outline"
+          titleStyle={{color: 'black'}}
+          buttonStyle={styles.btn}
+          onPress={handlePress}
+        />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  title: {
+    textAlign: 'center',
+    position: 'absolute',
+    top: 50,
+  },
+  form: {
+    width: '60%',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
+  btn: {
+    borderColor: 'black',
+  },
+});
+
+export default Register;

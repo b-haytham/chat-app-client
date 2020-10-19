@@ -1,41 +1,43 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import LottieView from 'lottie-react-native';
 
 import {View, Text} from 'react-native';
 
 
-const Launch = ({navigation}:any) => {
+import { LaunchSceenRouteProps, LaunchScreenNavigationProps } from './types';
 
-    useEffect(()=> {
-        setTimeout(()=> {
-            navigation.navigate('Register')
-        }, 2000)
-    })
+
+type Props = {
+  navigation: LaunchScreenNavigationProps
+  route: LaunchSceenRouteProps
+}
+
+
+const Launch: React.FC<Props> = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Register');
+    }, 2000);
+  });
 
   return (
-    <View style={{
+    <View
+      style={{
         flex: 1,
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor : 'white',
-        
-        
-    }}>
-        
-       <LottieView
-        
+        backgroundColor: 'white',
+      }}>
+      <LottieView
         style={{
-            width: '90%',
-            height:'auto'
+          width: '90%',
+          height: 'auto',
         }}
-        source={
-          require('../social-network.json')
-        }
-        
+        source={require('../social-network.json')}
         autoPlay
         loop
-      /> 
+      />
     </View>
   );
 };
