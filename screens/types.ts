@@ -1,4 +1,4 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { BottomTabNavigationProp, BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthStackParamList, MainTabParamList } from "../navigation/types";
@@ -19,10 +19,10 @@ export type LoginSceenRouteProps = RouteProp<AuthStackParamList, 'Login'>
 
 // main Flow Navigation Props
 
-export type HomeSceenNavigationProps = BottomTabScreenProps<MainTabParamList, 'Home'>
-export type FriendsSceenNavigationProps = BottomTabScreenProps<MainTabParamList, 'Friends'>
-export type ProfileSceenNavigationProps = BottomTabScreenProps<MainTabParamList, 'Profile'>
-export type SettingsSceenNavigationProps = BottomTabScreenProps<MainTabParamList, 'Settings'>
+export type HomeSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Home'>
+export type FriendsSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Friends'>
+export type ProfileSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Profile'>
+export type SettingsSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Settings'>
 
 
 // Main Flow Route Props

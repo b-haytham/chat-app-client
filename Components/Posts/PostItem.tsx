@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Card, ListItem} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 type Props = {
   item: number;
@@ -17,7 +19,7 @@ const PostItem: React.FC<Props> = () => {
         }}
       />
       <ListItem containerStyle={styles.listItem} style={styles.listItem}>
-        <View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Avatar
             rounded
             size="small"
@@ -26,10 +28,10 @@ const PostItem: React.FC<Props> = () => {
                 'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg',
             }}
           />
-          <ListItem.Title>Username</ListItem.Title>
+          <ListItem.Title style={{marginLeft: 10}}>Username</ListItem.Title>
         </View>
         <View>
-            
+            <Icon name='heart' size={20} color='red' />
         </View>
       </ListItem>
     </Card>

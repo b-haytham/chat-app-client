@@ -13,6 +13,7 @@ const SuggestedPeople = () => {
         <View style={styles.container}>
             <Text h4>Suggestion</Text>
             <FlatList
+                                
                 style={styles.list}
                 horizontal
                 scrollEnabled

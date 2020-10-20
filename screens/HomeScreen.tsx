@@ -13,12 +13,12 @@ type Props = {
 }
   
 
-const  HomeScreen:React.FC<Props> = ({route}) => {
+const  HomeScreen:React.FC<Props> = ({route, navigation}) => {
     
     return (
         
         <View style={styles.container}> 
-            <Header />
+            <Header onAvatarPress={()=> navigation.navigate('Profile')} />
             <SearchInput />
             <SuggestedPeople />
             <View>

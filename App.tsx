@@ -8,9 +8,9 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {initialWindowMetrics, SafeAreaProvider} from 'react-native-safe-area-context';
 
 //import {PersistGate} from 'redux-persist/es/integration/react';
 import {Provider} from 'react-redux';
@@ -27,9 +27,9 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-        <SafeAreaProvider >
+        {/* <SafeAreaProvider > */}
           <Navigation/>
-        </SafeAreaProvider>
+        {/* </SafeAreaProvider> */}
       {/* </PersistGate> */}
     </Provider>
   );

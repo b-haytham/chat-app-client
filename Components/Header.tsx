@@ -3,10 +3,10 @@ import { View, StyleSheet} from 'react-native'
 import { Avatar, Text } from 'react-native-elements'
 
 type Props = {
-
+    onAvatarPress: () => void
 }
 
-const Header: React.FC<Props> = () => {
+const Header: React.FC<Props> = ({onAvatarPress}) => {
     return (
         <View style={styles.container}>
             <View>
@@ -14,7 +14,7 @@ const Header: React.FC<Props> = () => {
                 <Text >Username</Text>
             </View>
             <Avatar
-                
+                onPress={onAvatarPress}
                 size='large'
                 rounded
                 source={{uri: 'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'}}

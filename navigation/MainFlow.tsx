@@ -12,11 +12,11 @@ const Tab =  createBottomTabNavigator<MainTabParamList>()
 
 const MainFlow = () => {
     return(
-        <Tab.Navigator>
-            <Tab.Screen name='Home' component={HomeScreen}  />
-            <Tab.Screen name='Friends' component={Friends}  />
-            <Tab.Screen name='Profile' component={Profile}  />
-            <Tab.Screen name='Settings' component={Settings} />
+        <Tab.Navigator tabBarOptions={{keyboardHidesTabBar: true}}>
+            <Tab.Screen name='Home' component={HomeScreen}   />
+            <Tab.Screen name='Friends' component={Friends}   />
+            <Tab.Screen name='Profile' component={Profile}  options={{tabBarVisible: false}} />
+            <Tab.Screen name='Settings' component={Settings}  />
         </Tab.Navigator>
     )
 }
