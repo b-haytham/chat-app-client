@@ -16,6 +16,7 @@
     "@feathersjs/socketio-client": "^4.5.9",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/bottom-tabs": "^5.9.2",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
     "@types/react-redux": "^7.1.9",

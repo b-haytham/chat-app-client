@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Text, Icon, Button} from 'react-native-elements';
-import { LaunchSceenRouteProps, LaunchScreenNavigationProps } from './types';
+import { RegisterSceenRouteProps, RegisterScreenNavigationProps } from './types';
 
 
 
 
 
 type Props = {
-  navigation: LaunchScreenNavigationProps
-  route: LaunchSceenRouteProps
+  navigation: RegisterScreenNavigationProps
+  route: RegisterSceenRouteProps
 }
 
 

@@ -27,7 +27,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-        <SafeAreaProvider>
+        <SafeAreaProvider >
           <Navigation/>
         </SafeAreaProvider>
       {/* </PersistGate> */}

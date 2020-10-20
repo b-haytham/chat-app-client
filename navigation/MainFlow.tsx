@@ -1,17 +1,23 @@
 
 import React from 'react'
 
-import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../screens/HomeScreen'
-import { MainStackParamList } from './types'
+import { MainTabParamList } from './types'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Friends from '../screens/Friends'
+import Profile from '../screens/Profile'
+import Settings from '../screens/Settings'
 
-const Stack =  createStackNavigator<MainStackParamList>()
+const Tab =  createBottomTabNavigator<MainTabParamList>()
 
 const MainFlow = () => {
     return(
-        <Stack.Navigator>
-            <Stack.Screen name='Home' component={HomeScreen} />
-        </Stack.Navigator>
+        <Tab.Navigator>
+            <Tab.Screen name='Home' component={HomeScreen}  />
+            <Tab.Screen name='Friends' component={Friends}  />
+            <Tab.Screen name='Profile' component={Profile}  />
+            <Tab.Screen name='Settings' component={Settings} />
+        </Tab.Navigator>
     )
 }
 

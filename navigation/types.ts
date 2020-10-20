@@ -6,6 +6,9 @@ export type AuthStackParamList = {
     Login: undefined
 }
 
-export type MainStackParamList = {
+export type MainTabParamList = {
     Home: undefined
+    Friends: undefined
+    Profile: undefined
+    Settings: undefined
 }

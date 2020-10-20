@@ -1,22 +1,38 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { LaunchScreenNavigationProps, LaunchSceenRouteProps } from './types'
+import { StyleSheet, Text, View } from 'react-native'
+import Header from '../Components/Header'
+import PostList from '../Components/Posts/PostList'
+import SearchInput from '../Components/SearchInput'
+import SuggestedPeople from '../Components/SuggestedPeopleSection/SuggestedPeople'
+import { HomeSceenNavigationProps, HomeSceenRouteProps } from './types'
 
 
 type Props = {
-    navigation: LaunchScreenNavigationProps
-    route: LaunchSceenRouteProps
+    navigation: HomeSceenNavigationProps
+    route: HomeSceenRouteProps
 }
   
 
 const  HomeScreen:React.FC<Props> = ({route}) => {
     
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 
-           <Text> Hello from Home </Text>
+        
+        <View style={styles.container}> 
+            <Header />
+            <SearchInput />
+            <SuggestedPeople />
+            <View>
+                <PostList/>
+            </View>
         </View>
     )
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        
+    }
+})
 
 export default HomeScreen
