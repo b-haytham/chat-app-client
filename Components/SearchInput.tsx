@@ -23,6 +23,7 @@ const SearchInput: React.FC<Props> = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
+    marginBottom: 20,
     paddingHorizontal: 30,
     alignItems: 'center',
   },
