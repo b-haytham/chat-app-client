@@ -6,19 +6,21 @@ import { Text } from 'react-native-elements'
 import SuggestedItem from './SuggestedItem'
 
 
+type Props = {
+    onItemPress: () => void
+}
 
-
-const SuggestedPeople = () => {
+const SuggestedPeople: React.FC<Props> = ({onItemPress}) => {
     return (
         <View style={styles.container}>
             <Text h4>Suggestion</Text>
             <FlatList
-                                
+                showsHorizontalScrollIndicator={false}        
                 style={styles.list}
                 horizontal
                 scrollEnabled
                 data={Arr}
-                renderItem={SuggestedItem}
+                renderItem={({item})=> <SuggestedItem item={item} onPress={onItemPress}/>}
                 keyExtractor={(item, index)=> index.toString()}
             />    
         </View>

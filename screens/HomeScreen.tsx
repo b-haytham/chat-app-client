@@ -20,7 +20,7 @@ const  HomeScreen:React.FC<Props> = ({route, navigation}) => {
         <View style={styles.container}> 
             <Header onAvatarPress={()=> navigation.navigate('Profile')} />
             <SearchInput />
-            <SuggestedPeople />
+            <SuggestedPeople onItemPress={()=> navigation.navigate('Profile')} />
             <View>
                 <PostList/>
             </View>

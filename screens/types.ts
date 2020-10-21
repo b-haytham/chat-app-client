@@ -1,7 +1,7 @@
 import { BottomTabNavigationProp, BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { AuthStackParamList, FriendsStackParamList, MainTabParamList } from "../navigation/types";
+import { AuthStackParamList, FriendsStackParamList, MainTabParamList, SettingStackParamList } from "../navigation/types";
 
 
 // Auth Flow Navigation Props
@@ -21,7 +21,6 @@ export type LoginSceenRouteProps = RouteProp<AuthStackParamList, 'Login'>
 
 export type HomeSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Home'>
 export type ProfileSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Profile'>
-export type SettingsSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Settings'>
 
 // main Flow >> Friends Flow Navigation Props
 
@@ -32,8 +31,22 @@ export type FriendsSceenNavigationProps = CompositeNavigationProp<
 export type ConversationSceenNavigationProps = CompositeNavigationProp<
     StackNavigationProp<FriendsStackParamList, 'Conversation'>,
     BottomTabNavigationProp<MainTabParamList>
-> 
+>
 
+// main Flow >> Setting Flow Navigation Props
+
+export type SettingsSceenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<SettingStackParamList, 'SettingsMain'>,
+    BottomTabNavigationProp<MainTabParamList>
+>  
+export type EditProfileSceenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<SettingStackParamList, 'EditProfile'>,
+    BottomTabNavigationProp<MainTabParamList>
+>  
+export type AppearanceSceenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<SettingStackParamList, 'Appearance'>,
+    BottomTabNavigationProp<MainTabParamList>
+>  
 
 // Main Flow Route Props
 
@@ -45,3 +58,9 @@ export type SettingsSceenRouteProps = RouteProp<MainTabParamList, 'Settings'>
 
 export type FriendsSceenRouteProps = RouteProp<FriendsStackParamList, 'FriendList'>
 export type ConversationScreenRouteProps = RouteProp<FriendsStackParamList, 'Conversation' >
+
+// Main Flow >> Setting Flow Route Props
+
+export type SettingsScreenRouteProps = RouteProp<SettingStackParamList, 'SettingsMain' >
+export type EditProfileScreenRouteProps = RouteProp<SettingStackParamList, 'EditProfile' >
+export type AppearanceScreenRouteProps = RouteProp<SettingStackParamList, 'Appearance' >

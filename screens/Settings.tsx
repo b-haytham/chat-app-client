@@ -20,6 +20,7 @@ const Settings: React.FC<Props> = ({navigation}) => {
       <Text h2> Setting </Text>
       <View style={{marginVertical: 20}}>
       <ListItem
+          onPress={()=> navigation.navigate('EditProfile')}
           Component={TouchableScale}
           //@ts-ignore
           activeScale={0.95} 
@@ -29,13 +30,14 @@ const Settings: React.FC<Props> = ({navigation}) => {
           <ListItem.Title style={styles.listItemTitle}>Edit Profile</ListItem.Title>
         </ListItem>
         <ListItem
+        onPress={()=> navigation.navigate('Appearance')}
           Component={TouchableScale}
           //@ts-ignore
           activeScale={0.95} 
           containerStyle={styles.listItemContainer}
         >
           
-          <ListItem.Title style={styles.listItemTitle}>Change Theme</ListItem.Title>
+          <ListItem.Title style={styles.listItemTitle}>Appearance</ListItem.Title>
         </ListItem>
         <ListItem
           Component={TouchableScale}
