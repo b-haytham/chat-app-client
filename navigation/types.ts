@@ -12,3 +12,9 @@ export type MainTabParamList = {
     Profile: undefined
     Settings: undefined
 }
+
+
+export type FriendsStackParamList = {
+    FriendList: undefined,
+    Conversation: undefined
+}

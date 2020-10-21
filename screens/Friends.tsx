@@ -1,10 +1,13 @@
-
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Avatar, Text, ListItem } from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler'
 import ActionBar from '../Components/ActionBar/ActionBar'
 import SearchInput from '../Components/SearchInput'
+import TouchableScale from 'react-native-touchable-scale';
+
+
+
 import { FriendsSceenNavigationProps, FriendsSceenRouteProps } from './types'
 
 
@@ -23,11 +26,13 @@ const Friends: React.FC<Props> = ({navigation}) => {
             <ScrollView>
                 {Arr.map((item, index)=>(
                     <ListItem containerStyle={styles.listItemContainer} key={index}>
+                        <TouchableScale activeScale={0.7} onPress={()=> navigation.push('Conversation') }>
                         <Avatar
                             size='medium'
                             rounded
                             source={{uri: 'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'}}
                         />
+                        </TouchableScale>
                         <ListItem.Content>
                             <ListItem.Title>Username</ListItem.Title>
                             <ListItem.Subtitle>message</ListItem.Subtitle>
