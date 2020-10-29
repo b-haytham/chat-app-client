@@ -18,17 +18,16 @@ type Props = {
 
 
 const HomeScreen: React.FC<Props> = ({route, navigation}) => {
-
-  const {currentUser} = useSelector((state: RootState)=> state.users)
-  
-  console.log(currentUser)
+ 
 
   return (
     <ScrollView style={styles.container}>
       <Header onAvatarPress={() => navigation.navigate('Profile')} />
       
       <SearchInput />
-      <SuggestedPeople onItemPress={() => navigation.navigate('Profile')} />
+      <SuggestedPeople onItemPress={(id) => navigation.navigate('UsersProfile', {
+        userId: id
+      })} />
       
       <PostList  />
       

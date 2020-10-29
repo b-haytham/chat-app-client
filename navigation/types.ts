@@ -1,4 +1,9 @@
 
+export type HomeStackParamList = {
+    Home: undefined
+    UsersProfile: { userId: string}
+}
+
 
 export type AuthStackParamList = {
     Launch: undefined

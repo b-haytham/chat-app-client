@@ -1,39 +1,34 @@
-import React from "react"
-import { StyleSheet, View } from "react-native"
-import { Avatar, Text } from "react-native-elements"
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Avatar, Text} from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale';
+import {UserType} from '../../redux/dataTypes';
 
 type Props = {
-    item: number,
-    onPress : () => void
-}
+  item: UserType;
+  onPress: () => void;
+};
 
-
-const SuggestedItem: React.FC<Props> = ({onPress}) => {
-    return (
-        <View style={styles.container}>
-            <TouchableScale activeScale={0.7} onPress={onPress}>
-            <Avatar    
-                rounded
-                size='medium'
-                source={{uri: 'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'}}
-            />
-            </TouchableScale>
-            <Text style={styles.text}>user</Text>
-        </View>
-    )
-}
+const SuggestedItem: React.FC<Props> = ({onPress, item}) => {
+  return (
+    <View style={styles.container}>
+      <TouchableScale activeScale={0.7} onPress={onPress}>
+        <Avatar rounded size="medium" source={{uri: item.avatar}} />
+      </TouchableScale>
+      <Text style={styles.text}>{item.username}</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        marginRight: 15,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    text: {
-        color: '#757472'
-    }
-})
+  container: {
+    marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: '#757472',
+  },
+});
 
-
-export default SuggestedItem
+export default SuggestedItem;

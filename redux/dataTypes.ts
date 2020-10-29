@@ -9,7 +9,7 @@ export type UserType = {
     requestsRecived: UserType[] | string[]
     followers: UserType[] | string[]
     follows: UserType[] | string[]
-    posts: PostType[] | string[]
+    posts: PostType[] | string[] | null
     comments: CommentType[] | string[]
     rooms: RoomType[] | string[]
     messagesSent: MessageType[] | string[]

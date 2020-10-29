@@ -1,12 +1,12 @@
 import React from 'react';
 
-import HomeScreen from '../screens/HomeScreen';
 import {MainTabParamList} from './types';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profile from '../screens/Profile';
 import FriendsFlow from './FriendsFlow';
 import SettingFlow from './SettingFlow';
 import {Icon} from 'react-native-elements';
+import HomeFlow from './HomeFlow';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -21,6 +21,7 @@ const getTabBarVisibility = (route: any) => {
 const MainFlow = () => {
   return (
     <Tab.Navigator
+      lazy={false}
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: 'black',
@@ -43,8 +44,10 @@ const MainFlow = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
-        options={{tabBarIcon: () => <Icon type="font-awesome" name="home" />}}
+        component={HomeFlow}
+        options={{
+          tabBarIcon: () => <Icon type="font-awesome" name="home" />,
+        }}
       />
       <Tab.Screen
         name="Friends"

@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Avatar, Text} from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/rootReducer';
 
 type Props = {
   onAvatarPress?: () => void;
@@ -8,6 +10,7 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({onAvatarPress, chatScreen}) => {
+  const {username, avatar} = useSelector(( state:RootState )=> state.auth.currentUser)
   return (
     <View
       style={[
@@ -19,16 +22,13 @@ const Header: React.FC<Props> = ({onAvatarPress, chatScreen}) => {
       ]}>
       <View>
         {!chatScreen && <Text h4>Welcome</Text>}
-        <Text h4={chatScreen ? true : undefined}>Username</Text>
+        <Text h4={chatScreen ? true : undefined}>{ username }</Text>
       </View>
       <Avatar
         onPress={onAvatarPress}
         size={!chatScreen ? 'large' : 'medium'}
         rounded
-        source={{
-          uri:
-            'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg',
-        }}
+        source={{uri: avatar}}
       />
     </View>
   );

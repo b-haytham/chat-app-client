@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import ActionBar from '../Components/ActionBar/ActionBar'
+import client from '../utils/feathersClient'
 import { EditProfileSceenNavigationProps, EditProfileScreenRouteProps } from './types'
 
 type Props = {
@@ -9,7 +10,12 @@ type Props = {
 }
 
 const EditProfile: React.FC<Props> = ({navigation}) => {
+    const [response, setResponce] = useState(null)
     
+    useEffect(()=>{
+
+    },[])
+
     return (
         <View style={styles.container}>
             <ActionBar onPress={()=> navigation.goBack()}/>

@@ -7,14 +7,24 @@ import MainFlow from './MainFlow';
 import client from '../utils/feathersClient';
 import { RootState } from '../redux/rootReducer';
 import { useAppDispatch } from '../redux/store';
-import { reAuthenticate } from '../redux/users/usersSlice';
+import { reAuthenticate } from '../redux/auth/authSlice';
 import { Text } from 'react-native';
+import { getSuggestedUser } from '../redux/users/thunkActions';
 
 const Navigation = () => {
   const dispatch = useAppDispatch()
   
-  const {isAuthenticated ,error,loading } = useSelector((state: RootState)=> state.users)
+  const {isAuthenticated ,error,loading } = useSelector((state: RootState)=> state.auth)
   console.log(isAuthenticated)
+
+
+  useEffect(()=> {
+
+    if(isAuthenticated) {
+      dispatch(getSuggestedUser())
+    }
+
+  }, [isAuthenticated])
 
 
   useEffect(()=>{

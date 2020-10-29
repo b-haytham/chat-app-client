@@ -3,14 +3,17 @@
 import React from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
 import { Text } from 'react-native-elements'
+import { useSelector } from 'react-redux'
 import SuggestedItem from './SuggestedItem'
 
+import { RootState } from '../../redux/rootReducer'
 
 type Props = {
-    onItemPress: () => void
+    onItemPress: (id: string) => void
 }
 
 const SuggestedPeople: React.FC<Props> = ({onItemPress}) => {
+    const suggestedUser =  useSelector((state: RootState)=> state.users.suggestedUser)
     return (
         <View style={styles.container}>
             <Text h4>Suggestion</Text>
@@ -19,9 +22,9 @@ const SuggestedPeople: React.FC<Props> = ({onItemPress}) => {
                 style={styles.list}
                 horizontal
                 scrollEnabled
-                data={Arr}
-                renderItem={({item})=> <SuggestedItem item={item} onPress={onItemPress}/>}
-                keyExtractor={(item, index)=> index.toString()}
+                data={suggestedUser}
+                renderItem={({item})=> <SuggestedItem item={item} onPress={()=> onItemPress(item._id)}/>}
+                keyExtractor={(item, index)=> item._id}
             />    
         </View>
     )
