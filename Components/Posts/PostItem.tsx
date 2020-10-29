@@ -10,7 +10,7 @@ type Props = {
 
 const PostItem: React.FC<Props> = () => {
   return (
-    <Card containerStyle={styles.container}>
+    <Card  containerStyle={styles.container}>
       <Card.Image
         style={styles.imageStyles}
         source={{

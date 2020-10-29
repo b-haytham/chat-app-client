@@ -5,3 +5,5 @@ declare module "*.json" {
 }
 
 declare module 'react-native-touchable-scale'
+
+declare module 'react-native-dotenv'

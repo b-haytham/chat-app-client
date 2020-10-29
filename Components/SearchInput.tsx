@@ -24,20 +24,21 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 30,
     marginBottom: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     alignItems: 'center',
+    zIndex: 500
   },
   searchBarContainer: {
     borderRadius: 25,
     shadowColor: '#000',
     shadowOffset: {
-      width: 0,
+      width: 10,
       height: 5,
     },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
+    shadowOpacity: 0.64,
+    shadowRadius: 3.27,
 
-    elevation: 10,
+    elevation: 4,
   },
 });
 

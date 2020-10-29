@@ -9,6 +9,7 @@ type Props = {
 }
 
 const EditProfile: React.FC<Props> = ({navigation}) => {
+    
     return (
         <View style={styles.container}>
             <ActionBar onPress={()=> navigation.goBack()}/>

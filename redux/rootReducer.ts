@@ -1,13 +1,12 @@
-const initialState = {
-  isAuth: true,
+import { combineReducers } from '@reduxjs/toolkit'
 
-};
-const rootReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+import usersSlice from './users/usersSlice'
+
+const rootReducer = combineReducers({
+  users: usersSlice
+})
+export type RootState = ReturnType<typeof rootReducer>
+
 export default rootReducer;
 
 

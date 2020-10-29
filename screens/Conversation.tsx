@@ -22,7 +22,9 @@ type Props = {
 
 
 const Conversation: React.FC<Props> = ({route, navigation}) => {
+
   const open = useKeyboardStatus();
+
 
   const [messages, setMessages] = useState<string[]>([]);
   const [ms, setMs] = useState('');
@@ -58,6 +60,8 @@ const Conversation: React.FC<Props> = ({route, navigation}) => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

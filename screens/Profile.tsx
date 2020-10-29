@@ -1,19 +1,22 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet, Dimensions, Animated, ScrollView} from 'react-native';
 import {Avatar, Button, Text} from 'react-native-elements';
 import ActionBar from '../Components/ActionBar/ActionBar';
 import PostList from '../Components/Posts/PostList';
 import {ProfileSceenNavigationProps, ProfileSceenRouteProps} from './types';
+
 
 type Props = {
   navigation: ProfileSceenNavigationProps;
   route: ProfileSceenRouteProps;
 };
 
-const Profile: React.FC<Props> = ({navigation}) => {
+
+const Profile: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ActionBar onPress={()=> navigation.navigate('Home')} />
+      <ActionBar onPress={() => navigation.navigate('Home')} />
+      <ScrollView  style={{marginBottom:70}}>
       <Text h2>Profile</Text>
       <View style={styles.avatarContainer}>
         <Avatar
@@ -50,11 +53,10 @@ const Profile: React.FC<Props> = ({navigation}) => {
         buttonStyle={{borderColor: 'black', width: '60%'}}
         containerStyle={{alignItems: 'center'}}
         titleStyle={{color: 'black'}}
-        
       />
-      <View>
-          <PostList />
-      </View>
+      
+      <PostList  />
+      </ScrollView>
     </View>
   );
 };

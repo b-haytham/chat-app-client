@@ -13,8 +13,8 @@ import React, { useEffect, useState } from 'react';
 import {initialWindowMetrics, SafeAreaProvider} from 'react-native-safe-area-context';
 
 //import {PersistGate} from 'redux-persist/es/integration/react';
-import {Provider} from 'react-redux';
-import {  store } from './redux/store';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 
 import Navigation from './navigation/Navigation';

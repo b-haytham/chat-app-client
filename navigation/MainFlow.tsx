@@ -1,24 +1,75 @@
+import React from 'react';
 
-import React from 'react'
+import HomeScreen from '../screens/HomeScreen';
+import {MainTabParamList} from './types';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Profile from '../screens/Profile';
+import FriendsFlow from './FriendsFlow';
+import SettingFlow from './SettingFlow';
+import {Icon} from 'react-native-elements';
 
-import HomeScreen from '../screens/HomeScreen'
-import { MainTabParamList } from './types'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Profile from '../screens/Profile'
-import FriendsFlow from './FriendsFlow'
-import SettingFlow from './SettingFlow'
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const Tab =  createBottomTabNavigator<MainTabParamList>()
 
-const MainFlow = () => {
-    return(
-        <Tab.Navigator tabBarOptions={{keyboardHidesTabBar: true}}>
-            <Tab.Screen name='Home' component={HomeScreen}   />
-            <Tab.Screen name='Friends' component={FriendsFlow} options={{tabBarVisible: false}}  />
-            <Tab.Screen name='Profile' component={Profile}  options={{tabBarVisible: false}} />
-            <Tab.Screen name='Settings' component={SettingFlow}  />
-        </Tab.Navigator>
-    )
+const getTabBarVisibility = (route: any) => {
+  const routeName = route.state ? route.state.routes[route.state.index].name : '';
+  if (routeName === 'Conversation') {
+    return false;
+  }
+  return true;
 }
+const MainFlow = () => {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+        activeTintColor: 'black',
+        inactiveTintColor: 'grey',
+        labelStyle: {fontWeight: 'bold'},
+        tabStyle: {paddingTop: 10, borderTopRightRadius: 15},
+        style: {
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 9,
+          },
+          shadowOpacity: 0.5,
+          shadowRadius: 12.35,
 
-export default MainFlow
+          elevation: 19,
+        },
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{tabBarIcon: () => <Icon type="font-awesome" name="home" />}}
+      />
+      <Tab.Screen
+        name="Friends"
+        component={FriendsFlow}
+        options={({route}) => {
+          return { 
+            tabBarVisible: getTabBarVisibility(route),
+            tabBarIcon: () => <Icon type="font-awesome" name="users" />,
+        }}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarVisible: false,
+          tabBarIcon: () => <Icon type="font-awesome" name="user-circle" />,
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingFlow}
+        options={{tabBarIcon: () => <Icon type="font-awesome" name="cogs" />}}
+      />
+    </Tab.Navigator>
+  );
+};
+
+export default MainFlow;

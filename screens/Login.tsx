@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Text, Icon, Button} from 'react-native-elements';
+import { useAppDispatch } from '../redux/store';
+import { authenticate } from '../redux/users/usersSlice';
 import { LoginSceenNavigationProps, LoginSceenRouteProps } from './types';
 
 
@@ -13,9 +15,15 @@ type Props = {
 
 
 const Login: React.FC<Props> = ({navigation, route}) => {
-  
-  const handlePress = () => {
 
+  const dispatch = useAppDispatch()
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  const handlePress = () => {
+    dispatch(authenticate(email,password, navigation))
   };
 
   return (
@@ -27,11 +35,15 @@ const Login: React.FC<Props> = ({navigation, route}) => {
         <Input
           placeholder="email address"
           leftIcon={{type: 'font-awesome', name: 'at'}}
+          value={email}
+          onChangeText={(v)=> setEmail(v)}
         />
        <Input 
             placeholder="password"
             leftIcon={{type: 'font-awesome', name: 'lock'}}
             secureTextEntry
+            value={password}
+            onChangeText={(v)=> setPassword(v)}
         />
         <Button
           title="Login"

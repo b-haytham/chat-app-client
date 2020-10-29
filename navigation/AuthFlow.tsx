@@ -14,7 +14,7 @@ const Stack = createStackNavigator<AuthStackParamList>()
 const AuthFlow = () => {
 
     return (
-       <Stack.Navigator initialRouteName='Launch'>
+       <Stack.Navigator initialRouteName='Login'>
            <Stack.Screen name='Launch' component={Launch} options={{headerShown: false}} />
            <Stack.Screen name='Register' component={Register} options={{headerShown: false}} />
            <Stack.Screen name='Login' component={Login} options={{headerShown: false}} />
