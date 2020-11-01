@@ -14,7 +14,7 @@ export type AuthStackParamList = {
 export type MainTabParamList = {
     Home: undefined
     Friends: undefined
-    Profile: undefined
+    Notification: undefined
     Settings: undefined
 }
 
@@ -28,4 +28,11 @@ export type SettingStackParamList = {
     SettingsMain: undefined
     EditProfile: undefined
     Appearance: undefined
+    Profile: undefined
+}
+
+export type FriendsListsTopTabParamsList = {
+    RequestsSent: undefined
+    RequestsRecieved: undefined
+    Friends: undefined
 }

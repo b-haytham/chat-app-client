@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
 import Message from '../Components/Message';
 
-import {useKeyboardStatus} from '../utils/useKeyboardStatus';
+
+import { useKeyboard } from '@react-native-community/hooks';
 
 import {
   ConversationSceenNavigationProps,
@@ -23,7 +24,7 @@ type Props = {
 
 const Conversation: React.FC<Props> = ({route, navigation}) => {
 
-  const open = useKeyboardStatus();
+  const  {keyboardShown} = useKeyboard()
 
 
   const [messages, setMessages] = useState<string[]>([]);
@@ -35,7 +36,7 @@ const Conversation: React.FC<Props> = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      {!open && (
+      {!keyboardShown && (
         <View>
           <ActionBar onPress={() => navigation.goBack()} />
           <Header chatScreen />

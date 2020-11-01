@@ -7,6 +7,7 @@ import FriendsFlow from './FriendsFlow';
 import SettingFlow from './SettingFlow';
 import {Icon} from 'react-native-elements';
 import HomeFlow from './HomeFlow';
+import NotificationScreen from '../screens/NotificationScreen';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -59,8 +60,8 @@ const MainFlow = () => {
         }}}
       />
       <Tab.Screen
-        name="Profile"
-        component={Profile}
+        name="Notification"
+        component={NotificationScreen}
         options={{
           tabBarVisible: false,
           tabBarIcon: () => <Icon type="font-awesome" name="user-circle" />,

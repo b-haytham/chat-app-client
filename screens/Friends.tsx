@@ -20,8 +20,6 @@ type Props = {
 const Friends: React.FC<Props> = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <ActionBar onPress={()=> navigation.goBack()} />
-            <Text h2>Friends</Text>
             <SearchInput />
             <ScrollView>
                 {Arr.map((item, index)=>(

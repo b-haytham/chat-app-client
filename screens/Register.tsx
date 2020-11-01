@@ -4,7 +4,7 @@ import {Input, Text, Icon, Button} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/rootReducer';
 import { useAppDispatch } from '../redux/store';
-import {createUser} from '../redux/users/usersSlice';
+import {createUser} from '../redux/auth/authSlice';
 import client from '../utils/feathersClient';
 import {RegisterSceenRouteProps, RegisterScreenNavigationProps} from './types';
 

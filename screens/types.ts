@@ -1,7 +1,8 @@
 import { BottomTabNavigationProp, BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { MaterialTopTabNavigationProp } from "@react-navigation/material-top-tabs";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { AuthStackParamList, FriendsStackParamList, HomeStackParamList, MainTabParamList, SettingStackParamList } from "../navigation/types";
+import { AuthStackParamList, FriendsListsTopTabParamsList, FriendsStackParamList, HomeStackParamList, MainTabParamList, SettingStackParamList } from "../navigation/types";
 
 
 // Auth Flow Navigation Props
@@ -19,14 +20,11 @@ export type LoginSceenRouteProps = RouteProp<AuthStackParamList, 'Login'>
 
 // main Flow Navigation Props
 
-export type ProfileSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Profile'>
+export type NotificationSceenNavigationProps = BottomTabNavigationProp<MainTabParamList, 'Notification'>
 
 // main Flow >> Friends Flow Navigation Props
 
-export type FriendsSceenNavigationProps = CompositeNavigationProp<
-    StackNavigationProp<FriendsStackParamList, 'FriendList'>,
-    BottomTabNavigationProp<MainTabParamList>
-> 
+
 export type ConversationSceenNavigationProps = CompositeNavigationProp<
     StackNavigationProp<FriendsStackParamList, 'Conversation'>,
     BottomTabNavigationProp<MainTabParamList>
@@ -47,6 +45,11 @@ export type AppearanceSceenNavigationProps = CompositeNavigationProp<
     BottomTabNavigationProp<MainTabParamList>
 >  
 
+export type ProfileSceenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<SettingStackParamList, 'Profile'>,
+    BottomTabNavigationProp<MainTabParamList>
+>
+
 // main Flow >> Home Flow Navigation props
 
 export type HomeSceenNavigationProps = CompositeNavigationProp<
@@ -60,15 +63,45 @@ export type UsersProfileNavigationProps = CompositeNavigationProp<
 >
 
 
+// Main FLow >> Friends Flow >> FriendsLists Flow
+
+export type FriendsSceenNavigationProps = CompositeNavigationProp<
+    MaterialTopTabNavigationProp<FriendsListsTopTabParamsList, 'Friends'>,
+    CompositeNavigationProp<
+        StackNavigationProp<FriendsStackParamList>,
+        BottomTabNavigationProp<MainTabParamList>
+    >
+> 
+
+
+export type RequestsSentSceenNavigationProps = CompositeNavigationProp<
+    MaterialTopTabNavigationProp<FriendsListsTopTabParamsList, 'RequestsSent'>,
+    CompositeNavigationProp<
+        StackNavigationProp<FriendsStackParamList>,
+        BottomTabNavigationProp<MainTabParamList>
+    >
+> 
+
+
+
+export type RequestsRecievedSceenNavigationProps = CompositeNavigationProp<
+    MaterialTopTabNavigationProp<FriendsListsTopTabParamsList, 'RequestsRecieved'>,
+    CompositeNavigationProp<
+        StackNavigationProp<FriendsStackParamList>,
+        BottomTabNavigationProp<MainTabParamList>
+    >
+> 
+
+
 // Main Flow Route Props
 
 
-export type ProfileSceenRouteProps = RouteProp<MainTabParamList, 'Profile'>
+export type NotificationSceenRouteProps = RouteProp<MainTabParamList, 'Notification'>
 export type SettingsSceenRouteProps = RouteProp<MainTabParamList, 'Settings'>
 
 // Main FLow >> Friends Flow Route Props
 
-export type FriendsSceenRouteProps = RouteProp<FriendsStackParamList, 'FriendList'>
+
 export type ConversationScreenRouteProps = RouteProp<FriendsStackParamList, 'Conversation' >
 
 // Main Flow >> Setting Flow Route Props
@@ -76,9 +109,17 @@ export type ConversationScreenRouteProps = RouteProp<FriendsStackParamList, 'Con
 export type SettingsScreenRouteProps = RouteProp<SettingStackParamList, 'SettingsMain' >
 export type EditProfileScreenRouteProps = RouteProp<SettingStackParamList, 'EditProfile' >
 export type AppearanceScreenRouteProps = RouteProp<SettingStackParamList, 'Appearance' >
+export type ProfileSceenRouteProps = RouteProp<SettingStackParamList, 'Profile'>
 
 
 // Main Flow >> Home Flow Route Props
 
 export type HomeSceenRouteProps = RouteProp<HomeStackParamList, 'Home'>
 export type UsersProfileRouteProps = RouteProp<HomeStackParamList, 'UsersProfile'>
+
+
+//Main Flow >> Friends FLow >> FriendsListFlow 
+
+export type FriendsSceenRouteProps = RouteProp<FriendsListsTopTabParamsList, 'Friends'>
+export type RequestsSentSceenRouteProps = RouteProp<FriendsListsTopTabParamsList, 'RequestsSent'>
+export type RequestsRecievedSceenRouteProps = RouteProp<FriendsListsTopTabParamsList, 'RequestsRecieved'>

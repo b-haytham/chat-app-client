@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Text, Icon, Button} from 'react-native-elements';
 import { useAppDispatch } from '../redux/store';
-import { authenticate } from '../redux/users/usersSlice';
+import { authenticate } from '../redux/auth/authSlice';
 import { LoginSceenNavigationProps, LoginSceenRouteProps } from './types';
 
 
