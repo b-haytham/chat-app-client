@@ -15,7 +15,7 @@ import { FriendsSceenNavigationProps, FriendsSceenRouteProps } from './types'
 type Props = {
     navigation: FriendsSceenNavigationProps
     route: FriendsSceenRouteProps
-  }
+}
 
 const Friends: React.FC<Props> = ({navigation}) => {
     return (

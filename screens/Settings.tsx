@@ -26,7 +26,6 @@ const Settings: React.FC<Props> = ({navigation}) => {
           activeScale={0.95} 
           containerStyle={styles.listItemContainer}
         >
-          
           <ListItem.Title style={styles.listItemTitle}>See Profile</ListItem.Title>
         </ListItem>  
       <ListItem
