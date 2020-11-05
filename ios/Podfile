@@ -14,6 +14,8 @@ target 'chat_app_client' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'ReactNativeAudioToolkit', :path => '../node_modules/@react-native-community/audio-toolkit'
+
   target 'chat_app_clientTests' do
     inherit! :complete
     # Pods for testing
