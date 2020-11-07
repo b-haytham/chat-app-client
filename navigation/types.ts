@@ -1,38 +1,40 @@
+import {UserType} from '../redux/dataTypes';
 
 export type HomeStackParamList = {
-    Home: undefined
-    UsersProfile: { userId: string}
-}
-
+  Home: undefined;
+  UsersProfile: {userId: string};
+};
 
 export type AuthStackParamList = {
-    Launch: undefined
-    Register: undefined
-    Login: undefined
-}
+  Launch: undefined;
+  Register: undefined;
+  Login: undefined;
+};
 
 export type MainTabParamList = {
-    Home: undefined
-    Friends: undefined
-    Notification: undefined
-    Settings: undefined
-}
-
+  Home: undefined;
+  Friends: undefined;
+  Notification: undefined;
+  Settings: undefined;
+};
 
 export type FriendsStackParamList = {
-    FriendList: undefined
-    Conversation: undefined
-}
+  FriendList: undefined;
+  Conversation: {
+    roomId: string;
+    userToSend: UserType;
+  };
+};
 
 export type SettingStackParamList = {
-    SettingsMain: undefined
-    EditProfile: undefined
-    Appearance: undefined
-    Profile: undefined
-}
+  SettingsMain: undefined;
+  EditProfile: undefined;
+  Appearance: undefined;
+  Profile: undefined;
+};
 
 export type FriendsListsTopTabParamsList = {
-    RequestsSent: undefined
-    RequestsRecieved: undefined
-    Friends: undefined
-}
+  RequestsSent: undefined;
+  RequestsRecieved: undefined;
+  Friends: undefined;
+};
