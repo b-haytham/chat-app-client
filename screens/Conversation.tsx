@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, StyleSheet, TextInput, Text} from 'react-native';
 import ActionBar from '../Components/ActionBar/ActionBar';
 import Header from '../Components/Header';
@@ -26,6 +26,7 @@ type Props = {
 const Conversation: React.FC<Props> = ({route, navigation}) => {
   console.log(route.params);
   const {keyboardShown} = useKeyboard();
+  const scrollViewRef = useRef();
 
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
@@ -33,7 +34,7 @@ const Conversation: React.FC<Props> = ({route, navigation}) => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [ms, setMs] = useState('');
 
-  console.log(messages);
+  // console.log(messages);
 
   const onSend = () => {
     client.service('messages').create({
@@ -57,11 +58,14 @@ const Conversation: React.FC<Props> = ({route, navigation}) => {
       {!keyboardShown && (
         <View>
           <ActionBar onPress={() => navigation.goBack()} />
-          <Header chatScreen />
         </View>
       )}
-
-      <ScrollView>
+      <ScrollView
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          //@ts-ignore
+          scrollViewRef.current.scrollToEnd({animated: true})
+        }>
         {messages &&
           messages.length > 0 &&
           messages.map((mess, index) => <Message key={index} message={mess} />)}

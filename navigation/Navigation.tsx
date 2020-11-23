@@ -15,6 +15,7 @@ import {Text} from 'react-native';
 import {getSuggestedUser} from '../redux/users/thunkActions';
 import {getRooms} from '../redux/rooms/thunkActions';
 import {addMessage} from '../redux/rooms/roomsSlice';
+import {playSound} from '../utils/playSound';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +34,13 @@ const Navigation = () => {
       dispatch(getRooms(currentUser._id));
 
       client.service('messages').on('created', (data: any) => {
-        dispatch(getRooms(currentUser._id));
-        console.log('NAVIGATION SCREEN', data);
+        console.log('MESSAGE RECIEVEEEED', data);
+        dispatch(addMessage(data));
+        // dispatch(getRooms(currentUser._id));
+        // if (currentUser._id !== data.sender) {
+        //   playSound('fa.mp3');
+        // }
+        // console.log('NAVIGATION SCREEN', data);
       });
     }
   }, [isAuthenticated]);

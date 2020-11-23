@@ -28,17 +28,14 @@ const roomsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addMessage(
-      state,
-      action: PayloadAction<{roomId: string; message: MessageType}>,
-    ) {
-      state.rooms = state.rooms.map((room, index) => {
-        if (room._id === action.payload.roomId) {
-          room.messages.push(action.payload.message);
-        } else {
-          return room;
-        }
-      });
+    addMessage(state, action: PayloadAction<MessageType>) {
+      const roomIndex = state.rooms.findIndex(
+        (r) => r._id === action.payload.room,
+      );
+      console.log(roomIndex);
+      if (roomIndex !== -1) {
+        state.rooms[roomIndex].messages.push(action.payload);
+      }
     },
   },
 });
