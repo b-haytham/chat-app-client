@@ -3,6 +3,7 @@ import {UserType} from '../redux/dataTypes';
 export type HomeStackParamList = {
   Home: undefined;
   UsersProfile: {userId: string};
+  PostDetail: {postId: string};
 };
 
 export type AuthStackParamList = {
@@ -31,6 +32,7 @@ export type SettingStackParamList = {
   EditProfile: undefined;
   Appearance: undefined;
   Profile: undefined;
+  CreatePost: undefined;
 };
 
 export type FriendsListsTopTabParamsList = {

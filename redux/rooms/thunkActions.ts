@@ -10,8 +10,7 @@ export const getRooms = (userId: string): AppThunk => async (dispatch) => {
         $or: [{creator: userId}, {acceptor: userId}],
       },
     });
-    console.log('ROOMS............', response.data)
-    dispatch(getRoomsSuccess(response.data))
+    dispatch(getRoomsSuccess(response.data));
   } catch (error) {
     console.log(error);
     dispatch(getRoomsFailure('ERROR GETTING ROOMS'));

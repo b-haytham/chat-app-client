@@ -1,7 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-type Props = {};
+import {CreatePostNavigationProps, CreatePostRouteProps} from './types';
+
+type Props = {
+  navigation: CreatePostNavigationProps;
+  route: CreatePostRouteProps;
+};
 
 const CreatePost: React.FC<Props> = ({}) => {
   return (
