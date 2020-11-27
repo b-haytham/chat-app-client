@@ -41,6 +41,7 @@ const Appearance: React.FC<Props> = ({navigation}) => {
         onPress={() => {
           navigation.goBack();
         }}
+        onPlusPress={() => navigation.navigate('CreatePost')}
       />
       <Text>Appearance</Text>
       <Button title="Play Sound" onPress={() => playSound('fa.mp3')} />

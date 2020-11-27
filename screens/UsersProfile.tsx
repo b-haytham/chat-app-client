@@ -53,7 +53,15 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
 
   return (
     <View style={[styles.container]}>
-      <ActionBar onPress={() => navigation.navigate('Home')} />
+      <ActionBar
+        onPress={() => navigation.navigate('Home')}
+        onPlusPress={() =>
+          //@ts-ignore
+          navigation.navigate('Settings', {
+            screen: 'CreatePost',
+          })
+        }
+      />
       <ScrollView style={{marginBottom: 70}}>
         <Text h2>Profile</Text>
         <View style={styles.avatarContainer}>

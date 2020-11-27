@@ -19,7 +19,10 @@ const Profile: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ActionBar onPress={() => navigation.navigate('Home')} />
+      <ActionBar
+        onPress={() => navigation.navigate('Home')}
+        onPlusPress={() => navigation.navigate('CreatePost')}
+      />
       <ScrollView style={{marginBottom: 70}}>
         <Text h2>Profile</Text>
         <View style={styles.avatarContainer}>
@@ -27,7 +30,7 @@ const Profile: React.FC<Props> = ({navigation}) => {
         </View>
         <View style={styles.userInfo}>
           <Text style={styles.name}>{username}</Text>
-           {/* <Text style={styles.job}>Unemployed</Text>
+          {/* <Text style={styles.job}>Unemployed</Text>
           <Text style={styles.city}>Sfax, Tunisia</Text> */}
         </View>
         <View style={styles.social}>
@@ -44,14 +47,6 @@ const Profile: React.FC<Props> = ({navigation}) => {
             <Text style={styles.socialNumber}> {follows.length} </Text>
           </View>
         </View>
-        <Button
-          title="FOLLOW"
-          type="outline"
-          buttonStyle={{borderColor: 'black', width: '60%'}}
-          containerStyle={{alignItems: 'center'}}
-          titleStyle={{color: 'black'}}
-        />
-
         <PostList />
       </ScrollView>
     </View>

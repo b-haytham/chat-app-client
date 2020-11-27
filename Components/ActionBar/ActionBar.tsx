@@ -2,20 +2,26 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TouchableScale from 'react-native-touchable-scale';
+import {useRoute} from '@react-navigation/native';
 
 type Props = {
   onPress: () => void;
+  onPlusPress?: () => void;
 };
 
-const ActionBar: React.FC<Props> = ({onPress}) => {
+const ActionBar: React.FC<Props> = ({onPress, onPlusPress}) => {
+  const route = useRoute();
   return (
     <View style={styles.container}>
       <TouchableScale onPress={onPress} activeScale={0.6}>
-        <Icon  name="arrow-left" size={25} />
+        <Icon name="arrow-left" size={25} />
       </TouchableScale>
-      <TouchableScale activeScale={0.6}>
-        <Icon name="braille" size={25} />
-      </TouchableScale>
+
+      {route.name !== 'CreatePost' && (
+        <TouchableScale activeScale={0.6} onPress={onPlusPress}>
+          <Icon name="plus" size={25} />
+        </TouchableScale>
+      )}
     </View>
   );
 };

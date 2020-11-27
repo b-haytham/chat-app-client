@@ -22,7 +22,10 @@ const EditProfile: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <ActionBar onPress={() => navigation.goBack()} />
+      <ActionBar
+        onPress={() => navigation.goBack()}
+        onPlusPress={() => navigation.navigate('CreatePost')}
+      />
       <Text> {JSON.stringify(rooms, null, 2)} </Text>
     </ScrollView>
   );

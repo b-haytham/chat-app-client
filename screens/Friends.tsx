@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Avatar, Text, ListItem} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import ActionBar from '../Components/ActionBar/ActionBar';
 import SearchInput from '../Components/SearchInput';
 import TouchableScale from 'react-native-touchable-scale';
 
