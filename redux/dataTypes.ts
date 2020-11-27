@@ -59,3 +59,12 @@ export type RoomType = {
   updatedAt: Date;
   __v: number;
 };
+
+export type FollowerType = {
+  _id: string;
+  sender: string;
+  reciever: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+};

@@ -4,7 +4,7 @@ import {
   RegisterScreenNavigationProps,
 } from '../../screens/types';
 import client from '../../utils/feathersClient';
-import {UserType} from '../dataTypes';
+import {FollowerType, UserType} from '../dataTypes';
 import {AppThunk} from '../store';
 
 type AuthState = {
@@ -47,6 +47,21 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    newFollower(state, action: PayloadAction<FollowerType>) {
+      state.currentUser.followers.push(
+        //@ts-ignore
+        state.currentUser._id === action.payload.reciever
+          ? action.payload.sender
+          : action.payload.reciever,
+      );
+      state.currentUser.follows.push(
+        //@ts-ignore
+        state.currentUser._id === action.payload.sender
+          ? action.payload.reciever
+          : action.payload.sender,
+      );
+    },
   },
 });
 
@@ -54,6 +69,7 @@ export const {
   createUserStart,
   createUserFailure,
   createUserSuccess,
+  newFollower,
 } = authSlice.actions;
 
 export const createUser = (

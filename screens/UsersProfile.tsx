@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {Avatar, Text, Button} from 'react-native-elements';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import ActionBar from '../Components/ActionBar/ActionBar';
-import { UserType } from '../redux/dataTypes';
-import { RootState } from '../redux/rootReducer';
+import {UserType} from '../redux/dataTypes';
+import {RootState} from '../redux/rootReducer';
 import client from '../utils/feathersClient';
 import {UsersProfileNavigationProps, UsersProfileRouteProps} from './types';
 
@@ -16,8 +16,9 @@ type Props = {
 const UsersProfile: React.FC<Props> = ({route, navigation}) => {
   const userId = route.params.userId;
 
-  const authenticatedUserId = useSelector((state: RootState)=> state.auth.currentUser._id)
-
+  const authenticatedUserId = useSelector(
+    (state: RootState) => state.auth.currentUser._id,
+  );
 
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,6 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
     async function fetchUserById(id: string) {
       try {
         const response = await client.service('users').get(id);
-        console.log(response);
         setUser(response);
         setLoading(false);
       } catch (error) {
@@ -40,17 +40,23 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
     fetchUserById(userId);
   }, [userId]);
 
+  const handleFollowPress = async () => {
+    client.service('followers').create({
+      sender: authenticatedUserId,
+      reciever: userId,
+    });
+  };
 
-  if(loading){
-      return <Text>......Loading</Text>
+  if (loading) {
+    return <Text>......Loading</Text>;
   }
 
   return (
     <View style={[styles.container]}>
       <ActionBar onPress={() => navigation.navigate('Home')} />
-       <ScrollView style={{marginBottom: 70}}>
+      <ScrollView style={{marginBottom: 70}}>
         <Text h2>Profile</Text>
-       <View style={styles.avatarContainer}>
+        <View style={styles.avatarContainer}>
           <Avatar rounded size="xlarge" source={{uri: user.avatar}} />
         </View>
         <View style={styles.userInfo}>
@@ -59,7 +65,10 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
         <View style={styles.social}>
           <View style={styles.socialItem}>
             <Text style={styles.socialText}> Posts </Text>
-            <Text style={styles.socialNumber}> {user.posts ? user.posts.length : 0} </Text>
+            <Text style={styles.socialNumber}>
+              {' '}
+              {user.posts ? user.posts.length : 0}{' '}
+            </Text>
           </View>
           <View style={styles.socialItem}>
             <Text style={styles.socialText}> Followers </Text>
@@ -76,6 +85,7 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
           buttonStyle={{borderColor: 'black', width: '60%'}}
           containerStyle={{alignItems: 'center'}}
           titleStyle={{color: 'black'}}
+          onPress={handleFollowPress}
         />
         <Button
           title="INVITE"
@@ -83,15 +93,14 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
           buttonStyle={{borderColor: 'black', width: '60%'}}
           containerStyle={{alignItems: 'center'}}
           titleStyle={{color: 'black'}}
-          onPress={ async () => {
+          onPress={async () => {
             const response = await client.service('friendship-request').create({
-                sender: authenticatedUserId,
-                reciever: userId
-            })
-            console.log(response)
+              sender: authenticatedUserId,
+              reciever: userId,
+            });
+            console.log(response);
           }}
         />
-        
       </ScrollView>
     </View>
   );

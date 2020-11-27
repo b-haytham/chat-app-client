@@ -10,7 +10,7 @@ import MainFlow from './MainFlow';
 import client from '../utils/feathersClient';
 import {RootState} from '../redux/rootReducer';
 import {useAppDispatch} from '../redux/store';
-import {reAuthenticate} from '../redux/auth/authSlice';
+import {newFollower, reAuthenticate} from '../redux/auth/authSlice';
 import {Text} from 'react-native';
 import {getSuggestedUser} from '../redux/users/thunkActions';
 import {getRooms} from '../redux/rooms/thunkActions';
@@ -41,6 +41,11 @@ const Navigation = () => {
         //   playSound('fa.mp3');
         // }
         // console.log('NAVIGATION SCREEN', data);
+      });
+
+      client.service('followers').on('created', (data: any) => {
+        console.log('FOLOWERS', data);
+        dispatch(newFollower(data));
       });
     }
   }, [isAuthenticated]);
