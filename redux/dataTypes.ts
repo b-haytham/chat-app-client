@@ -3,8 +3,8 @@ export type UserType = {
   username: string;
   email: string;
   avatar: string;
-  requestsSent: UserType[] | string[];
-  requestsRecived: UserType[] | string[];
+  requestsSent: UserType[];
+  requestsRecieved: UserType[];
   followers: UserType[] | string[];
   follows: UserType[] | string[];
   posts: PostType[] | string[] | null;
