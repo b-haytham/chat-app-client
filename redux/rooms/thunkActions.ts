@@ -3,7 +3,7 @@ import {AppThunk} from '../store';
 import {getRoomsFailure, getRoomsStart, getRoomsSuccess} from './roomsSlice';
 
 export const getRooms = (userId: string): AppThunk => async (dispatch) => {
-  dispatch(getRoomsStart);
+  dispatch(getRoomsStart());
   try {
     const response = await client.service('rooms').find({
       query: {

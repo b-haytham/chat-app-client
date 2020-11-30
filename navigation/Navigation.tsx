@@ -16,6 +16,7 @@ import {getSuggestedUser} from '../redux/users/thunkActions';
 import {getRooms} from '../redux/rooms/thunkActions';
 import {addMessage} from '../redux/rooms/roomsSlice';
 import {playSound} from '../utils/playSound';
+import {getPosts} from '../redux/posts/thunkActions';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const Navigation = () => {
     if (isAuthenticated) {
       dispatch(getSuggestedUser());
       dispatch(getRooms(currentUser._id));
+      dispatch(getPosts());
 
       client.service('messages').on('created', (data: any) => {
         console.log('MESSAGE RECIEVEEEED', data);
