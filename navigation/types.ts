@@ -1,9 +1,9 @@
-import {UserType} from '../redux/dataTypes';
+import {PostType, UserType} from '../redux/dataTypes';
 
 export type HomeStackParamList = {
   Home: undefined;
   UsersProfile: {userId: string};
-  PostDetail: {postId: string};
+  PostDetail: {post: PostType};
 };
 
 export type AuthStackParamList = {

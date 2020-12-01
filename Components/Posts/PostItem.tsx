@@ -1,6 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Avatar, Card, ListItem} from 'react-native-elements';
+import {Avatar, Card, Divider, ListItem} from 'react-native-elements';
+
+import {useNavigation} from '@react-navigation/native';
+
+import TouchableScale from 'react-native-touchable-scale';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {PostType} from '../../redux/dataTypes';
@@ -10,30 +15,47 @@ type Props = {
 };
 
 const PostItem: React.FC<Props> = ({item}) => {
+  const navigation = useNavigation();
   return (
     <Card containerStyle={styles.container}>
-      <Card.Image
-        style={styles.imageStyles}
-        source={{
-          uri: item.content,
-        }}
-      />
+      <TouchableScale
+        onPress={() => navigation.navigate('PostDetail', {post: item})}
+        activeScale={0.97}>
+        <Card.Image
+          style={styles.imageStyles}
+          source={{
+            uri: item.content,
+          }}
+        />
+      </TouchableScale>
       <ListItem containerStyle={styles.listItem} style={styles.listItem}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Avatar
-            rounded
-            size="small"
-            source={{
-              uri: item.owner.avatar,
-            }}
-          />
+          <ListItem.Title style={{marginLeft: 10}}>
+            {item.description}
+          </ListItem.Title>
+        </View>
+      </ListItem>
+      <Divider />
+      <ListItem containerStyle={styles.listItem} style={styles.listItem}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TouchableScale activeScale={0.6}>
+            <Avatar
+              rounded
+              size="small"
+              source={{
+                uri: item.owner.avatar,
+              }}
+            />
+          </TouchableScale>
           <ListItem.Title style={{marginLeft: 10}}>
             {item.owner.username}
           </ListItem.Title>
         </View>
-        <View>
-          <Icon name="heart" size={20} color="red" />
-        </View>
+        <TouchableScale activeScale={0.6}>
+          <View>
+            <Icon name="heart" size={20} color="grey" />
+          </View>
+        </TouchableScale>
       </ListItem>
     </Card>
   );
@@ -46,6 +68,7 @@ const styles = StyleSheet.create({
   },
 
   imageStyles: {
+    height: 200,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
