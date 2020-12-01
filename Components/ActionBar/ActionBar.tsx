@@ -7,9 +7,16 @@ import {useRoute} from '@react-navigation/native';
 type Props = {
   onPress: () => void;
   onPlusPress?: () => void;
+  onCameraPress?: () => void;
+  onFilePress?: () => void;
 };
 
-const ActionBar: React.FC<Props> = ({onPress, onPlusPress}) => {
+const ActionBar: React.FC<Props> = ({
+  onPress,
+  onPlusPress,
+  onCameraPress,
+  onFilePress,
+}) => {
   const route = useRoute();
   return (
     <View style={styles.container}>
@@ -22,6 +29,16 @@ const ActionBar: React.FC<Props> = ({onPress, onPlusPress}) => {
           <Icon name="plus" size={25} />
         </TouchableScale>
       )}
+      {route.name == 'CreatePost' && (
+        <View style={styles.CameraFileContainer}>
+          <TouchableScale activeScale={0.6} onPress={onFilePress}>
+            <Icon style={styles.icon} name="folder" size={25} />
+          </TouchableScale>
+          <TouchableScale activeScale={0.6} onPress={onCameraPress}>
+            <Icon style={styles.icon} name="camera" size={25} />
+          </TouchableScale>
+        </View>
+      )}
     </View>
   );
 };
@@ -32,6 +49,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  CameraFileContainer: {
+    flexDirection: 'row',
+  },
+  icon: {
+    marginLeft: 20,
   },
 });
 
