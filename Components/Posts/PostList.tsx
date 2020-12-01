@@ -1,25 +1,23 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Animated,
-  Button,
-  Dimensions,
-} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
+
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/rootReducer';
 
 import PostItem from './PostItem';
 
 type Props = {};
 
 const PostList: React.FC<Props> = ({}) => {
-  
+  const posts = useSelector((state: RootState) => state.posts.posts);
+
   return (
     <View style={styles.container}>
-      {Arr.map((itm, ind) => (
-        <PostItem key={ind} item={itm} />
-      ))}
+      {!posts ||
+        (posts.length == 0 && <Text style={styles.text}>No Posts yet</Text>)}
+      {posts &&
+        posts.length > 0 &&
+        posts.map((itm, ind) => <PostItem key={ind} item={itm} />)}
     </View>
   );
 
@@ -36,8 +34,13 @@ const PostList: React.FC<Props> = ({}) => {
 
 const styles = StyleSheet.create({
   container: {},
+  text: {
+    alignSelf: 'center',
+    fontSize: 24,
+    marginVertical: 30,
+    color: 'grey',
+    fontWeight: 'bold',
+  },
 });
-
-const Arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default PostList;

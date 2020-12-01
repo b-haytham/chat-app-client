@@ -1,21 +1,21 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Card, ListItem} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {PostType} from '../../redux/dataTypes';
 
 type Props = {
-  item: number;
+  item: PostType;
 };
 
-const PostItem: React.FC<Props> = () => {
+const PostItem: React.FC<Props> = ({item}) => {
   return (
-    <Card  containerStyle={styles.container}>
+    <Card containerStyle={styles.container}>
       <Card.Image
         style={styles.imageStyles}
         source={{
-          uri:
-            'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg',
+          uri: item.content,
         }}
       />
       <ListItem containerStyle={styles.listItem} style={styles.listItem}>
@@ -24,14 +24,15 @@ const PostItem: React.FC<Props> = () => {
             rounded
             size="small"
             source={{
-              uri:
-                'https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg',
+              uri: item.owner.avatar,
             }}
           />
-          <ListItem.Title style={{marginLeft: 10}}>Username</ListItem.Title>
+          <ListItem.Title style={{marginLeft: 10}}>
+            {item.owner.username}
+          </ListItem.Title>
         </View>
         <View>
-            <Icon name='heart' size={20} color='red' />
+          <Icon name="heart" size={20} color="red" />
         </View>
       </ListItem>
     </Card>

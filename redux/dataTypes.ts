@@ -22,8 +22,12 @@ export type PostType = {
   title: string;
   description: string;
   content: string;
-  owner: UserType | string;
-  comments: CommentType[] | string[];
+  owner: {
+    _id: string;
+    username: string;
+    avatar: string;
+  };
+  comments: CommentType[];
   createdAt: Date;
   updatedAt: Date;
   __v: number;
