@@ -4,6 +4,10 @@ import {ListItem, Text} from 'react-native-elements';
 import ActionBar from '../Components/ActionBar/ActionBar';
 import TouchableScale from 'react-native-touchable-scale';
 
+import client from '../utils/feathersClient';
+
+import RNRestart from 'react-native-restart';
+
 import {SettingsSceenNavigationProps, SettingsSceenRouteProps} from './types';
 
 type Props = {
@@ -51,6 +55,11 @@ const Settings: React.FC<Props> = ({navigation}) => {
           </ListItem.Title>
         </ListItem>
         <ListItem
+          onPress={async () => {
+            const response = await client.logout();
+            console.log(response);
+            RNRestart.Restart();
+          }}
           Component={TouchableScale}
           //@ts-ignore
           activeScale={0.95}

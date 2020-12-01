@@ -18,6 +18,8 @@ target 'chat_app_client' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'react-native-restart', :path => '../node_modules/react-native-restart'
+
   target 'chat_app_clientTests' do
     inherit! :complete
     # Pods for testing

@@ -72,3 +72,20 @@ export type FollowerType = {
   updatedAt: Date;
   __v: number;
 };
+
+export type FriendShipRequestType = {
+  _id: string;
+  sender: {
+    _id: string;
+    username: string;
+    avatar: string;
+  };
+  reciever: {
+    _id: string;
+    username: string;
+    avatar: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+};

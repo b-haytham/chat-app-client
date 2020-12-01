@@ -18,6 +18,11 @@ import {addMessage} from '../redux/rooms/roomsSlice';
 import {playSound} from '../utils/playSound';
 import {getPosts} from '../redux/posts/thunkActions';
 import {newPost} from '../redux/posts/postsSlice';
+import {getFriendSipRequests} from '../redux/friendsRequests/thunkActions';
+import {
+  newRequestRecieved,
+  newRequestSent,
+} from '../redux/friendsRequests/friendsRequestsSlice';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +40,7 @@ const Navigation = () => {
       dispatch(getSuggestedUser());
       dispatch(getRooms(currentUser._id));
       dispatch(getPosts());
+      dispatch(getFriendSipRequests(currentUser._id));
 
       client.service('messages').on('created', (data: any) => {
         console.log('MESSAGE RECIEVEEEED', data);
@@ -54,6 +60,18 @@ const Navigation = () => {
       client.service('posts').on('created', (data: any) => {
         console.log(data);
         dispatch(newPost(data));
+      });
+
+      client.service('friendship-request').on('created', (data: any) => {
+        console.log('NAVIGATION EVENT', data);
+        if (data.sender._id === currentUser._id) {
+          console.log('RequestSent : ', data);
+          dispatch(newRequestSent(data));
+        }
+        if (data.reciever._id === currentUser._id) {
+          console.log('RequestRecieved : ', data);
+          dispatch(newRequestRecieved(data));
+        }
       });
     }
   }, [isAuthenticated]);
