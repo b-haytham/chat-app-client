@@ -28,6 +28,9 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    newPost(state, action: PayloadAction<PostType>) {
+      state.posts.unshift(action.payload);
+    },
   },
 });
 
@@ -35,6 +38,7 @@ export const {
   getPostsFailure,
   getPostsStart,
   getPostsSuccess,
+  newPost,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;

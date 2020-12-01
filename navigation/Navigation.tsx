@@ -17,6 +17,7 @@ import {getRooms} from '../redux/rooms/thunkActions';
 import {addMessage} from '../redux/rooms/roomsSlice';
 import {playSound} from '../utils/playSound';
 import {getPosts} from '../redux/posts/thunkActions';
+import {newPost} from '../redux/posts/postsSlice';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +49,11 @@ const Navigation = () => {
       client.service('followers').on('created', (data: any) => {
         console.log('FOLOWERS', data);
         dispatch(newFollower(data));
+      });
+
+      client.service('posts').on('created', (data: any) => {
+        console.log(data);
+        dispatch(newPost(data));
       });
     }
   }, [isAuthenticated]);
