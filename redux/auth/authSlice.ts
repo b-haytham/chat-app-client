@@ -108,7 +108,8 @@ export const authenticate = (
     });
     dispatch(authSlice.actions.authenticateUserSuccess(response.user));
   } catch (error) {
-    console.log('error create User', error);
+    console.log('error authenticate User', error);
+    console.error(error);
     dispatch(authSlice.actions.createUserFailure('Error authenticate User'));
   }
 };
@@ -119,7 +120,7 @@ export const reAuthenticate = (): AppThunk => async (dispatch) => {
     const response = await client.reAuthenticate();
     dispatch(authSlice.actions.authenticateUserSuccess(response.user));
   } catch (error) {
-    console.log('error create User', error);
+    console.log('error reauthenticate User', error);
     dispatch(authSlice.actions.createUserFailure('Error authenticate User'));
   }
 };

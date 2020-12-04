@@ -14,6 +14,8 @@ import TouchableScale from 'react-native-touchable-scale';
 import SearchInput from '../Components/SearchInput';
 
 import {Avatar, ListItem} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import client from '../utils/feathersClient';
 
 type Props = {
   navigation: RequestsRecievedSceenNavigationProps;
@@ -22,13 +24,20 @@ type Props = {
 
 const RequestsRecieved: React.FC<Props> = ({navigation}) => {
   const requestsRecieved = useSelector(
-    (state: RootState) => state.auth.currentUser.requestsRecieved,
+    (state: RootState) => state.friendShipRequests.friendShipRequestsRecieved,
   );
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 
   console.log(currentUser);
 
   console.log('Request Recieved', requestsRecieved);
+
+  const acceptRequest = async (id: string) => {
+    const response = await client
+      .service('friendship-request')
+      .patch(id, {isAccepted: true});
+    console.log(response);
+  };
 
   return (
     <View style={styles.container}>
@@ -42,13 +51,23 @@ const RequestsRecieved: React.FC<Props> = ({navigation}) => {
                   size="medium"
                   rounded
                   source={{
-                    uri: item.avatar,
+                    uri: item.sender.avatar,
                   }}
                 />
               </TouchableScale>
               <ListItem.Content>
-                <ListItem.Title>{item.username}</ListItem.Title>
+                <ListItem.Title>{item.sender.username}</ListItem.Title>
               </ListItem.Content>
+              <View style={styles.actions}>
+                <TouchableScale
+                  activeScale={0.6}
+                  onPress={() => acceptRequest(item._id)}>
+                  <Icon name="check" size={25} />
+                </TouchableScale>
+                <TouchableScale activeScale={0.6} onPress={() => {}}>
+                  <Icon style={{marginLeft: 15}} name="trash" size={25} />
+                </TouchableScale>
+              </View>
             </ListItem>
           ))
         ) : (
@@ -66,6 +85,10 @@ const styles = StyleSheet.create({
   listItemContainer: {
     borderRadius: 25,
     marginVertical: 10,
+  },
+  actions: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     fontSize: 24,

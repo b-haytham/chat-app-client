@@ -20,6 +20,8 @@ import {getPosts} from '../redux/posts/thunkActions';
 import {newPost} from '../redux/posts/postsSlice';
 import {getFriendSipRequests} from '../redux/friendsRequests/thunkActions';
 import {
+  deleteRequestRecived,
+  deleteRequestSent,
   newRequestRecieved,
   newRequestSent,
 } from '../redux/friendsRequests/friendsRequestsSlice';
@@ -71,6 +73,20 @@ const Navigation = () => {
         if (data.reciever._id === currentUser._id) {
           console.log('RequestRecieved : ', data);
           dispatch(newRequestRecieved(data));
+        }
+      });
+
+      client.service('friendship-request').on('patched', (data: any) => {
+        if (data.isAccepted) {
+          console.log('FriendShip Request is PATCHED', data);
+          if (data.sender._id === currentUser._id) {
+            console.log(data.sender._id, '          ', currentUser._id);
+            dispatch(deleteRequestSent(data._id));
+          }
+          if (data.reciever._id === currentUser._id) {
+            console.log(data.reciever._id, '          ', currentUser._id);
+            dispatch(deleteRequestRecived(data._id));
+          }
         }
       });
     }

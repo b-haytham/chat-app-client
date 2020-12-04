@@ -2,6 +2,9 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar, ListItem} from 'react-native-elements';
 import SearchInput from '../Components/SearchInput';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import {
   RequestsSentSceenNavigationProps,
   RequestsSentSceenRouteProps,
@@ -18,9 +21,10 @@ type Props = {
 
 const RequestsSent: React.FC<Props> = ({navigation}) => {
   const requestsSent = useSelector(
-    (state: RootState) => state.auth.currentUser.requestsSent,
+    (state: RootState) => state.friendShipRequests.friendshipRequestsSent,
   );
   console.log('Repuests Sent', requestsSent);
+
   return (
     <View style={styles.container}>
       <SearchInput />
@@ -28,20 +32,33 @@ const RequestsSent: React.FC<Props> = ({navigation}) => {
         {requestsSent.length > 0 ? (
           requestsSent.map((item, index) => (
             <ListItem containerStyle={styles.listItemContainer} key={index}>
-              <TouchableScale
-                activeScale={0.7}
-                onPress={() => {
-                  //@ts-ignore
-                  navigation.navigate('Home', {
-                    screen: 'UsersProfile',
-                    params: {userId: item._id},
-                  });
-                }}>
-                <Avatar size="medium" rounded source={{uri: item.avatar}} />
-              </TouchableScale>
-              <ListItem.Content>
-                <ListItem.Title>{item.username}</ListItem.Title>
-              </ListItem.Content>
+              <View style={styles.avatarUserNameContainer}>
+                <TouchableScale
+                  activeScale={0.7}
+                  onPress={() => {
+                    //@ts-ignore
+                    navigation.navigate('Home', {
+                      screen: 'UsersProfile',
+                      params: {userId: item.reciever._id},
+                    });
+                  }}>
+                  <Avatar
+                    size="medium"
+                    rounded
+                    source={{uri: item.reciever.avatar}}
+                  />
+                </TouchableScale>
+                <ListItem.Content>
+                  <ListItem.Title style={{marginLeft: 10}}>
+                    {item.reciever.username}
+                  </ListItem.Title>
+                </ListItem.Content>
+                <View style={styles.actions}>
+                  <TouchableScale activeScale={0.6} onPress={() => {}}>
+                    <Icon style={{marginLeft: 15}} name="trash" size={25} />
+                  </TouchableScale>
+                </View>
+              </View>
             </ListItem>
           ))
         ) : (
@@ -59,6 +76,16 @@ const styles = StyleSheet.create({
   listItemContainer: {
     borderRadius: 25,
     marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  avatarUserNameContainer: {
+    flexDirection: 'row',
+  },
+  actions: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     fontSize: 24,

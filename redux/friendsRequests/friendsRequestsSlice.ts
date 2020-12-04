@@ -44,6 +44,16 @@ const friendShipRequestsSlice = createSlice({
     newRequestSent(state, action: PayloadAction<FriendShipRequestType>) {
       state.friendshipRequestsSent.unshift(action.payload);
     },
+    deleteRequestSent(state, action: PayloadAction<string>) {
+      state.friendshipRequestsSent = state.friendshipRequestsSent.filter(
+        (r) => r._id !== action.payload,
+      );
+    },
+    deleteRequestRecived(state, action: PayloadAction<string>) {
+      state.friendShipRequestsRecieved = state.friendShipRequestsRecieved.filter(
+        (r) => r._id !== action.payload,
+      );
+    },
   },
 });
 
@@ -53,6 +63,8 @@ export const {
   getFriendShipRequestsSuccess,
   newRequestSent,
   newRequestRecieved,
+  deleteRequestRecived,
+  deleteRequestSent,
 } = friendShipRequestsSlice.actions;
 
 export default friendShipRequestsSlice.reducer;

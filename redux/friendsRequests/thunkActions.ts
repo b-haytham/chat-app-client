@@ -14,6 +14,7 @@ export const getFriendSipRequests = (userId: string): AppThunk => async (
     const response = await client.service('friendship-request').find({
       query: {
         $or: [{sender: userId}, {reciever: userId}],
+        isAccepted: false,
       },
     });
     const requestsRecieved = response.data.filter(
