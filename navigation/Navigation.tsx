@@ -11,7 +11,7 @@ import client from '../utils/feathersClient';
 import {RootState} from '../redux/rootReducer';
 import {useAppDispatch} from '../redux/store';
 import {newFollower, reAuthenticate} from '../redux/auth/authSlice';
-import {Text} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import {getSuggestedUser} from '../redux/users/thunkActions';
 import {getRooms} from '../redux/rooms/thunkActions';
 import {addMessage} from '../redux/rooms/roomsSlice';
@@ -26,11 +26,15 @@ import {
   newRequestSent,
 } from '../redux/friendsRequests/friendsRequestsSlice';
 
+import NotificationPopup from 'react-native-push-notification-popup';
+
 const Navigation = () => {
   const dispatch = useAppDispatch();
 
   const routeNameRef = useRef<string>();
   const navigationRef = useRef<NavigationContainerRef>();
+
+  const notificationRef = useRef<NotificationPopup>();
 
   const {isAuthenticated, error, loading, currentUser} = useSelector(
     (state: RootState) => state.auth,
@@ -61,6 +65,13 @@ const Navigation = () => {
 
       client.service('posts').on('created', (data: any) => {
         console.log(data);
+        notificationRef.current.show({
+          appTitle: 'new Post',
+          title: 'new Post',
+          body: 'new Post',
+          timeText: 'Now',
+          slideOutTime: 3000,
+        });
         dispatch(newPost(data));
       });
 
@@ -112,7 +123,24 @@ const Navigation = () => {
         console.log('ROUTE NAME', routeNameRef.current);
       }}>
       {isAuthenticated ? <MainFlow /> : <AuthFlow />}
+      <NotificationPopup
+        ref={notificationRef}
+        renderPopupContent={CustomPopup}
+      />
     </NavigationContainer>
+  );
+};
+
+const CustomPopup = ({title, body}) => {
+  return (
+    <View style={{backgroundColor: 'grey', zIndex: 6516515}}>
+      <Text>{title}</Text>
+      <Text>{body}</Text>
+      <Button
+        title="My button"
+        onPress={() => console.log('Popup button onPress!')}
+      />
+    </View>
   );
 };
 
