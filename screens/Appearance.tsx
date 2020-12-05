@@ -1,28 +1,17 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Button,
-  Platform,
-  Image,
-} from 'react-native';
-
-import ImagePicker, {ImagePickerResponse} from 'react-native-image-picker';
+import {View, Text, StyleSheet} from 'react-native';
 
 import ActionBar from '../Components/ActionBar/ActionBar';
-import {playSound} from '../utils/playSound';
 
 import {
   AppearanceSceenNavigationProps,
   AppearanceScreenRouteProps,
 } from './types';
 
-import client from '../utils/feathersClient';
-
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/rootReducer';
+import {ListItem} from 'react-native-elements';
+import {Switch} from 'react-native-gesture-handler';
 
 type Props = {
   navigation: AppearanceSceenNavigationProps;
@@ -32,9 +21,10 @@ type Props = {
 const Appearance: React.FC<Props> = ({navigation}) => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 
-  const [imagePicker, setImagePicker] = useState<ImagePickerResponse | null>(
-    null,
-  );
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => setDarkMode((prevState) => !prevState);
+
   return (
     <View style={styles.container}>
       <ActionBar
@@ -43,79 +33,55 @@ const Appearance: React.FC<Props> = ({navigation}) => {
         }}
         onPlusPress={() => navigation.navigate('CreatePost')}
       />
-      <Text>Appearance</Text>
-      <Button title="Play Sound" onPress={() => playSound('fa.mp3')} />
-      <Button
-        title="Image Picker"
-        onPress={() => {
-          ImagePicker.launchCamera(
-            {
-              mediaType: 'photo',
-              allowsEditing: true,
-              quality: 1,
-            },
-            (response) => {
-              setImagePicker(response);
-            },
-          );
-        }}
-      />
-      <Button
-        title="Select image"
-        onPress={() =>
-          ImagePicker.launchImageLibrary(
-            {
-              mediaType: 'photo',
-              allowsEditing: true,
-              quality: 1,
-            },
-            (response) => {
-              setImagePicker(response);
-            },
-          )
-        }
-      />
-      <Button
-        title="Send Request"
-        onPress={async () => {
-          const response = await client.service('posts').create({
-            title: 'tictklnvakl',
-            description: 'jafkjjj',
-            content: 'aslkfjafj',
-            data: {
-              name: imagePicker.fileName,
-              base64: imagePicker.data,
-            },
-          });
-          console.log(response);
-        }}
-      />
-      {imagePicker && (
-        <Image
-          source={{uri: imagePicker.uri}}
-          style={{width: 200, height: 200}}
+      <Text style={styles.title}>Appearance</Text>
+      <ListItem containerStyle={styles.listItemContainer}>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItemTitle}>
+            Dark Mode
+          </ListItem.Title>
+        </ListItem.Content>
+        <Switch
+          trackColor={{false: 'grey', true: 'green'}}
+          value={darkMode}
+          onValueChange={toggleDarkMode}
         />
-      )}
+      </ListItem>
+      <ListItem containerStyle={styles.listItemContainer}>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItemTitle}>
+            Select Primary Color
+          </ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+      <ListItem containerStyle={styles.listItemContainer}>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItemTitle}>
+            Select Secondary Color
+          </ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
     </View>
   );
 };
-
-const Arr = ['#000011', '#ff0235', '#00f', '#010d01', '#0f1'];
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
   },
-  view: {
-    width: '60%',
-    height: 100,
-    backgroundColor: 'green',
-    borderRadius: 25,
-    alignSelf: 'center',
-    margin: 10,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 25,
   },
-  scrollview: {},
+  listItemContainer: {
+    borderRadius: 25,
+    marginVertical: 5,
+  },
+  listItemTitle: {
+    fontWeight: 'bold',
+    color: 'grey',
+  },
 });
 
 export default Appearance;

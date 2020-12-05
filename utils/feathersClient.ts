@@ -13,7 +13,6 @@ import {API_URL} from '@env';
 const socket = io(API_URL, {
   transports: ['websocket'],
   forceNew: true,
-  timeout: 20000,
 });
 const client = feathers();
 
