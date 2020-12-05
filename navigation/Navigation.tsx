@@ -27,6 +27,7 @@ import {
 } from '../redux/friendsRequests/friendsRequestsSlice';
 
 import NotificationPopup from 'react-native-push-notification-popup';
+import CustomNotificationPopup from '../Components/CustomNotificationPopup';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -125,22 +126,9 @@ const Navigation = () => {
       {isAuthenticated ? <MainFlow /> : <AuthFlow />}
       <NotificationPopup
         ref={notificationRef}
-        renderPopupContent={CustomPopup}
+        renderPopupContent={CustomNotificationPopup}
       />
     </NavigationContainer>
-  );
-};
-
-const CustomPopup = ({title, body}) => {
-  return (
-    <View style={{backgroundColor: 'grey', zIndex: 6516515}}>
-      <Text>{title}</Text>
-      <Text>{body}</Text>
-      <Button
-        title="My button"
-        onPress={() => console.log('Popup button onPress!')}
-      />
-    </View>
   );
 };
 

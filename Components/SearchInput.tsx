@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 20,
     alignItems: 'center',
-    zIndex: 500
   },
   searchBarContainer: {
     borderRadius: 25,
