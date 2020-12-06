@@ -36,11 +36,6 @@ export type LoginSceenRouteProps = RouteProp<AuthStackParamList, 'Login'>;
 
 // main Flow Navigation Props
 
-export type NotificationSceenNavigationProps = BottomTabNavigationProp<
-  MainTabParamList,
-  'Notification'
->;
-
 // main Flow >> Friends Flow Navigation Props
 
 export type ConversationSceenNavigationProps = CompositeNavigationProp<
@@ -90,6 +85,11 @@ export type PostDetailsNavigationProps = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList>
 >;
 
+export type SearchNavigationProps = CompositeNavigationProp<
+  StackNavigationProp<HomeStackParamList, 'Search'>,
+  BottomTabNavigationProp<MainTabParamList>
+>;
+
 // Main FLow >> Friends Flow >> FriendsLists Flow
 
 export type FriendsSceenNavigationProps = CompositeNavigationProp<
@@ -121,10 +121,6 @@ export type RequestsRecievedSceenNavigationProps = CompositeNavigationProp<
 
 // Main Flow Route Props
 
-export type NotificationSceenRouteProps = RouteProp<
-  MainTabParamList,
-  'Notification'
->;
 export type SettingsSceenRouteProps = RouteProp<MainTabParamList, 'Settings'>;
 
 // Main FLow >> Friends Flow Route Props
@@ -166,6 +162,7 @@ export type UsersProfileRouteProps = RouteProp<
   'UsersProfile'
 >;
 export type PostDetailRouteProps = RouteProp<HomeStackParamList, 'PostDetail'>;
+export type SearchRouteProps = RouteProp<HomeStackParamList, 'Search'>;
 
 //Main Flow >> Friends FLow >> FriendsListFlow
 

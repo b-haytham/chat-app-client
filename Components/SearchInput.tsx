@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 
-type Props = {};
+type Props = {
+  onPress?: () => void;
+};
 
-const SearchInput: React.FC<Props> = () => {
+const SearchInput: React.FC<Props> = ({onPress}) => {
   const [term, setTerm] = useState('');
 
   return (
-    <View style={styles.container}>
+    <TouchableHighlight style={styles.container} onPress={onPress}>
       <SearchBar
         platform="android"
         containerStyle={styles.searchBarContainer}
@@ -16,7 +18,7 @@ const SearchInput: React.FC<Props> = () => {
         onChangeText={(v) => setTerm(v)}
         value={term}
       />
-    </View>
+    </TouchableHighlight>
   );
 };
 

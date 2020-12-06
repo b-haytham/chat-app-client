@@ -4,6 +4,7 @@ export type HomeStackParamList = {
   Home: undefined;
   UsersProfile: {userId: string};
   PostDetail: {post: PostType};
+  Search: undefined;
 };
 
 export type AuthStackParamList = {
@@ -15,7 +16,6 @@ export type AuthStackParamList = {
 export type MainTabParamList = {
   Home: undefined;
   Friends: undefined;
-  Notification: undefined;
   Settings: undefined;
 };
 

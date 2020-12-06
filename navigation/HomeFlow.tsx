@@ -6,6 +6,7 @@ import {HomeStackParamList} from './types';
 import HomeScreen from '../screens/HomeScreen';
 import UsersProfile from '../screens/UsersProfile';
 import PostDetail from '../screens/PostDetail';
+import SearchScreen from '../screens/SearchScreen';
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
@@ -25,6 +26,11 @@ const HomeFlow = () => {
       <Stack.Screen
         name="PostDetail"
         component={PostDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
