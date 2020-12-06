@@ -23,10 +23,17 @@ const Profile: React.FC<Props> = ({navigation}) => {
         onPress={() => navigation.navigate('Home')}
         onPlusPress={() => navigation.navigate('CreatePost')}
       />
-      <ScrollView style={{marginBottom: 70}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{marginBottom: 50}}>
         <Text h2>Profile</Text>
         <View style={styles.avatarContainer}>
-          <Avatar rounded size="xlarge" source={{uri: avatar}} />
+          <Avatar
+            containerStyle={styles.avatar}
+            rounded
+            size="xlarge"
+            source={{uri: avatar}}
+          />
         </View>
         <View style={styles.userInfo}>
           <Text style={styles.name}>{username}</Text>
@@ -69,17 +76,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginVertical: 7,
   },
-  job: {
-    color: '#9c9b98',
-  },
-  city: {
-    fontWeight: '700',
-    color: '#545454',
-  },
+
   social: {
     marginVertical: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderWidth: 1.5,
+    paddingVertical: 5,
+    borderRadius: 15,
   },
   socialItem: {
     width: '30%',
@@ -91,6 +95,19 @@ const styles = StyleSheet.create({
   socialNumber: {
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  avatar: {
+    borderEndColor: 'black',
+    borderWidth: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 6,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 18.14,
+
+    elevation: 19,
   },
 });
 

@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
-import {Avatar, Text, Button} from 'react-native-elements';
+import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
+import {Avatar, Text, Button, Divider} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import ActionBar from '../Components/ActionBar/ActionBar';
 import {UserType} from '../redux/dataTypes';
 import {RootState} from '../redux/rootReducer';
 import client from '../utils/feathersClient';
 import {UsersProfileNavigationProps, UsersProfileRouteProps} from './types';
+
+const {width} = Dimensions.get('window');
 
 type Props = {
   navigation: UsersProfileNavigationProps;
@@ -62,10 +64,17 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
           })
         }
       />
-      <ScrollView style={{marginBottom: 70}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{marginBottom: 70}}>
         <Text h2>Profile</Text>
         <View style={styles.avatarContainer}>
-          <Avatar rounded size="xlarge" source={{uri: user.avatar}} />
+          <Avatar
+            containerStyle={styles.avatar}
+            rounded
+            size="xlarge"
+            source={{uri: user.avatar}}
+          />
         </View>
         <View style={styles.userInfo}>
           <Text style={styles.name}>{user.username}</Text>
@@ -87,28 +96,26 @@ const UsersProfile: React.FC<Props> = ({route, navigation}) => {
             <Text style={styles.socialNumber}> {user.follows.length} </Text>
           </View>
         </View>
-        <Button
-          title="FOLLOW"
-          type="outline"
-          buttonStyle={{borderColor: 'black', width: '60%'}}
-          containerStyle={{alignItems: 'center'}}
-          titleStyle={{color: 'black'}}
-          onPress={handleFollowPress}
-        />
-        <Button
-          title="INVITE"
-          type="outline"
-          buttonStyle={{borderColor: 'black', width: '60%'}}
-          containerStyle={{alignItems: 'center'}}
-          titleStyle={{color: 'black'}}
-          onPress={async () => {
-            const response = await client.service('friendship-request').create({
-              sender: authenticatedUserId,
-              reciever: userId,
-            });
-            console.log(response);
-          }}
-        />
+        <View style={styles.actions}>
+          <Button
+            title="FOLLOW"
+            buttonStyle={styles.btn}
+            onPress={handleFollowPress}
+          />
+          <Button
+            title="INVITE"
+            buttonStyle={styles.btn}
+            onPress={async () => {
+              const response = await client
+                .service('friendship-request')
+                .create({
+                  sender: authenticatedUserId,
+                  reciever: userId,
+                });
+              console.log(response);
+            }}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -127,20 +134,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontWeight: '700',
+    fontWeight: 'bold',
     marginVertical: 7,
-  },
-  job: {
-    color: '#9c9b98',
-  },
-  city: {
-    fontWeight: '700',
-    color: '#545454',
   },
   social: {
     marginVertical: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderWidth: 1.5,
+    paddingVertical: 5,
+    borderRadius: 15,
   },
   socialItem: {
     width: '30%',
@@ -152,6 +155,31 @@ const styles = StyleSheet.create({
   socialNumber: {
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  avatar: {
+    borderEndColor: 'black',
+    borderWidth: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 6,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 18.14,
+
+    elevation: 19,
+  },
+  btn: {
+    backgroundColor: 'black',
+    width: width / 4,
+    alignSelf: 'center',
+    borderRadius: 20,
+    marginVertical: 20,
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

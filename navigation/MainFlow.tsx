@@ -11,14 +11,15 @@ import NotificationScreen from '../screens/NotificationScreen';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
-
 const getTabBarVisibility = (route: any) => {
-  const routeName = route.state ? route.state.routes[route.state.index].name : '';
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : '';
   if (routeName === 'Conversation') {
     return false;
   }
   return true;
-}
+};
 const MainFlow = () => {
   return (
     <Tab.Navigator
@@ -54,19 +55,20 @@ const MainFlow = () => {
         name="Friends"
         component={FriendsFlow}
         options={({route}) => {
-          return { 
+          return {
             tabBarVisible: getTabBarVisibility(route),
             tabBarIcon: () => <Icon type="font-awesome" name="users" />,
-        }}}
+          };
+        }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Notification"
         component={NotificationScreen}
         options={{
           tabBarVisible: false,
           tabBarIcon: () => <Icon type="font-awesome" name="user-circle" />,
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Settings"
         component={SettingFlow}
