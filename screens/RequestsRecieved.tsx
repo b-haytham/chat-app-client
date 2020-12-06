@@ -41,8 +41,7 @@ const RequestsRecieved: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <SearchInput />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         {requestsRecieved.length > 0 ? (
           requestsRecieved.map((item, index) => (
             <ListItem containerStyle={styles.listItemContainer} key={index}>
@@ -81,10 +80,21 @@ const RequestsRecieved: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
+    flex: 1,
   },
   listItemContainer: {
     borderRadius: 25,
     marginVertical: 10,
+    borderWidth: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10.14,
+
+    elevation: 2,
   },
   actions: {
     flexDirection: 'row',
@@ -96,6 +106,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
     color: 'grey',
+  },
+  scrollView: {
+    marginVertical: 20,
   },
 });
 

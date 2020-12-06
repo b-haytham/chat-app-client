@@ -2,12 +2,12 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Avatar, Text, ListItem} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import SearchInput from '../Components/SearchInput';
 import TouchableScale from 'react-native-touchable-scale';
 
 import {FriendsSceenNavigationProps, FriendsSceenRouteProps} from './types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/rootReducer';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type Props = {
   navigation: FriendsSceenNavigationProps;
@@ -22,8 +22,7 @@ const Friends: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <SearchInput />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         {rooms &&
           rooms.map((item, index) => (
             <ListItem containerStyle={styles.listItemContainer} key={index}>
@@ -57,6 +56,9 @@ const Friends: React.FC<Props> = ({navigation}) => {
                 </ListItem.Title>
                 <ListItem.Subtitle>message</ListItem.Subtitle>
               </ListItem.Content>
+              <TouchableScale activeScale={0.6} onPress={() => {}}>
+                <Icon style={{marginLeft: 15}} name="trash" size={25} />
+              </TouchableScale>
             </ListItem>
           ))}
       </ScrollView>
@@ -67,10 +69,24 @@ const Friends: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
+    flex: 1,
   },
   listItemContainer: {
     borderRadius: 25,
     marginVertical: 10,
+    borderWidth: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10.14,
+
+    elevation: 2,
+  },
+  scrollView: {
+    marginVertical: 20,
   },
 });
 
