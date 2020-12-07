@@ -26,6 +26,8 @@ import {
   newRequestSent,
 } from '../redux/friendsRequests/friendsRequestsSlice';
 
+import LottieView from 'lottie-react-native';
+
 import NotificationPopup from 'react-native-push-notification-popup';
 import CustomNotificationPopup from '../Components/CustomNotificationPopup';
 
@@ -41,6 +43,24 @@ const Navigation = () => {
     (state: RootState) => state.auth,
   );
   console.log(isAuthenticated);
+
+  const {
+    error: usersLoading,
+    loading: usersLoadind,
+    suggestedUser,
+  } = useSelector((state: RootState) => state.users);
+
+  const {posts, loading: postsLoadig, error: postsError} = useSelector(
+    (state: RootState) => state.posts,
+  );
+
+  const {rooms, loading: roomsLoading, error: roomsError} = useSelector(
+    (state: RootState) => state.rooms,
+  );
+
+  const {error: fiendsLoading, loading: friendsLoading} = useSelector(
+    (state: RootState) => state.friendShipRequests,
+  );
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -108,8 +128,26 @@ const Navigation = () => {
     dispatch(reAuthenticate());
   }, []);
 
-  if (loading) {
-    return <Text>...Loading</Text>;
+  if (loading || roomsLoading || fiendsLoading || postsLoadig || usersLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}>
+        <LottieView
+          style={{
+            width: '90%',
+            height: 'auto',
+          }}
+          source={require('../chat-conversation.json')}
+          autoPlay
+          loop
+        />
+      </View>
+    );
   }
 
   return (

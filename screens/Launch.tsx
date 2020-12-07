@@ -4,15 +4,12 @@ import LottieView from 'lottie-react-native';
 
 import {View, Text} from 'react-native';
 
-
-import { LaunchSceenRouteProps, LaunchScreenNavigationProps } from './types';
-
+import {LaunchSceenRouteProps, LaunchScreenNavigationProps} from './types';
 
 type Props = {
-  navigation: LaunchScreenNavigationProps
-  route: LaunchSceenRouteProps
-}
-
+  navigation: LaunchScreenNavigationProps;
+  route: LaunchSceenRouteProps;
+};
 
 const Launch: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
@@ -34,7 +31,7 @@ const Launch: React.FC<Props> = ({navigation}) => {
           width: '90%',
           height: 'auto',
         }}
-        source={require('../social-network.json')}
+        source={require('../chat-conversation.json')}
         autoPlay
         loop
       />
