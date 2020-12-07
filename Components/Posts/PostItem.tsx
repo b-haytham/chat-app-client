@@ -20,7 +20,7 @@ const PostItem: React.FC<Props> = ({item}) => {
     <Card containerStyle={styles.container}>
       <TouchableScale
         onPress={() => navigation.navigate('PostDetail', {post: item})}
-        activeScale={0.97}>
+        activeScale={0.999}>
         <Card.Image
           style={styles.imageStyles}
           source={{

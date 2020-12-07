@@ -14,6 +14,8 @@ import {useSelector} from 'react-redux';
 
 import ImagePicker, {ImagePickerResponse} from 'react-native-image-picker';
 
+import FitImage from 'react-native-fit-image';
+
 import {CreatePostNavigationProps, CreatePostRouteProps} from './types';
 import {RootState} from '../redux/rootReducer';
 import client from '../utils/feathersClient';
@@ -91,9 +93,9 @@ const CreatePost: React.FC<Props> = ({navigation}) => {
         </View>
       )}
       {image && (
-        <Image
-          transition
-          resizeMode="cover"
+        <FitImage
+          originalHeight={200}
+          originalWidth={width - 40}
           style={styles.image}
           source={{uri: image.uri}}
         />
