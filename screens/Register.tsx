@@ -1,44 +1,35 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Input, Text, Icon, Button} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/rootReducer';
-import { useAppDispatch } from '../redux/store';
+import {useAppDispatch} from '../redux/store';
 import {createUser} from '../redux/auth/authSlice';
 import client from '../utils/feathersClient';
 import {RegisterSceenRouteProps, RegisterScreenNavigationProps} from './types';
-
-
 
 type Props = {
   navigation: RegisterScreenNavigationProps;
   route: RegisterSceenRouteProps;
 };
 
-const Register: React.FC<Props> = ({navigation}) => {
+const {width} = Dimensions.get('window');
 
-  const dispatch = useAppDispatch()
+const Register: React.FC<Props> = ({navigation}) => {
+  const dispatch = useAppDispatch();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const ref = useRef(0)
-
-  ref.current++
-
   const handlePress = async () => {
-    dispatch(createUser(username,email,password, navigation))
-    
+    dispatch(createUser(username, email, password, navigation));
   };
-
-  console.log('ref', ref)
-  
 
   return (
     <View style={styles.container}>
       <Text h1 style={styles.title}>
-        Register 
+        Register
       </Text>
       <View style={styles.form}>
         <Input
@@ -62,12 +53,13 @@ const Register: React.FC<Props> = ({navigation}) => {
         />
         <Button
           title="Register"
-          type="outline"
-          titleStyle={{color: 'black'}}
           buttonStyle={styles.btn}
           onPress={handlePress}
         />
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Text>Already have an account? Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -81,8 +73,6 @@ const styles = StyleSheet.create({
 
   title: {
     textAlign: 'center',
-    position: 'absolute',
-    top: 50,
   },
   form: {
     width: '60%',
@@ -90,7 +80,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btn: {
-    borderColor: 'black',
+    backgroundColor: 'black',
+    width: width / 2,
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginVertical: 20,
   },
 });
 

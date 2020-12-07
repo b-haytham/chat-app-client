@@ -1,29 +1,26 @@
-import React, { useState } from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import {Input, Text, Icon, Button} from 'react-native-elements';
-import { useAppDispatch } from '../redux/store';
-import { authenticate } from '../redux/auth/authSlice';
-import { LoginSceenNavigationProps, LoginSceenRouteProps } from './types';
-
-
+import {useAppDispatch} from '../redux/store';
+import {authenticate} from '../redux/auth/authSlice';
+import {LoginSceenNavigationProps, LoginSceenRouteProps} from './types';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type Props = {
-  navigation: LoginSceenNavigationProps
-  route: LoginSceenRouteProps
-}
+  navigation: LoginSceenNavigationProps;
+  route: LoginSceenRouteProps;
+};
 
-
+const {width} = Dimensions.get('window');
 
 const Login: React.FC<Props> = ({navigation, route}) => {
+  const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch()
-  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   const handlePress = () => {
-    dispatch(authenticate(email,password, navigation))
+    dispatch(authenticate(email, password, navigation));
   };
 
   return (
@@ -36,23 +33,20 @@ const Login: React.FC<Props> = ({navigation, route}) => {
           placeholder="email address"
           leftIcon={{type: 'font-awesome', name: 'at'}}
           value={email}
-          onChangeText={(v)=> setEmail(v)}
+          onChangeText={(v) => setEmail(v)}
         />
-       <Input 
-            placeholder="password"
-            leftIcon={{type: 'font-awesome', name: 'lock'}}
-            secureTextEntry
-            value={password}
-            onChangeText={(v)=> setPassword(v)}
+        <Input
+          placeholder="password"
+          leftIcon={{type: 'font-awesome', name: 'lock'}}
+          secureTextEntry
+          value={password}
+          onChangeText={(v) => setPassword(v)}
         />
-        <Button
-          title="Login"
-          type="outline"
-          titleStyle={{color: 'black'}}
-          buttonStyle={styles.btn}
-          onPress={handlePress}
-        />
+        <Button title="Login" buttonStyle={styles.btn} onPress={handlePress} />
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text>don´t have account? Register</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -66,8 +60,6 @@ const styles = StyleSheet.create({
 
   title: {
     textAlign: 'center',
-    position: 'absolute',
-    top: 50,
   },
   form: {
     width: '60%',
@@ -75,7 +67,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btn: {
-    borderColor: 'black',
+    backgroundColor: 'black',
+    width: width / 2,
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginVertical: 20,
   },
 });
 
