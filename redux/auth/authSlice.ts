@@ -106,6 +106,7 @@ export const authenticate = (
       email,
       password,
     });
+    console.log(response)
     dispatch(authSlice.actions.authenticateUserSuccess(response.user));
   } catch (error) {
     console.log('error authenticate User', error);

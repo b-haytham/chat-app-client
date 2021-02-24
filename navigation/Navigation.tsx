@@ -45,8 +45,8 @@ const Navigation = () => {
   console.log(isAuthenticated);
 
   const {
-    error: usersLoading,
-    loading: usersLoadind,
+    error: usersError,
+    loading: usersLoading,
     suggestedUser,
   } = useSelector((state: RootState) => state.users);
 
@@ -58,7 +58,7 @@ const Navigation = () => {
     (state: RootState) => state.rooms,
   );
 
-  const {error: fiendsLoading, loading: friendsLoading} = useSelector(
+  const {error: fiendsError, loading: friendsLoading} = useSelector(
     (state: RootState) => state.friendShipRequests,
   );
 
@@ -128,7 +128,7 @@ const Navigation = () => {
     dispatch(reAuthenticate());
   }, []);
 
-  if (loading || roomsLoading || fiendsLoading || postsLoadig || usersLoading) {
+  if (loading || roomsLoading || friendsLoading || postsLoadig || usersLoading) {
     return (
       <View
         style={{
